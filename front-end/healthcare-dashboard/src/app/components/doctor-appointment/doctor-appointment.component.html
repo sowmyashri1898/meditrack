@@ -1,0 +1,143 @@
+
+  <div class="doctor-portal-container">
+    <div class="appointments-section" style="display: flex;justify-content: flex-end; padding-top: 1rem;">
+      <button pButton label="Add New Appointment" icon="pi pi-plus" (click)="AddVisit()"></button>
+    </div>
+    <div class="appointments-section">
+      <h3>Upcoming Appointments</h3>
+      <p-table [value]="upcomingAppointments" [responsive]="true" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Appointment Date</th>
+            <th>Patient</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointment>
+          <tr>
+            <td>{{ appointment.appointmentDate | date }}</td>
+            <td>{{ appointment.patientName }}</td>
+            <td>{{ appointment.reason }}</td>
+            <td>{{ appointment.status }}</td>
+            <td>
+              <button pButton icon="pi pi-eye" label="View" (click)="viewAppointmentDetails(appointment)" class="p-button-text"></button>
+              <button pButton icon="pi pi-times" label="Cancel" (click)="cancelAppointment(appointment.appointmentId)" class="p-button-danger"></button>
+              <button pButton icon="pi pi-video" label="Start Video Call" (click)="startVideoCall(appointment)" class="p-button-text"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+    <!-- Past Appointments -->
+    <div class="appointments-section">
+      <h3>Past Appointments</h3>
+      <p-table [value]="pastAppointments" [responsive]="true" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Appointment Date</th>
+            <th>Patient</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Details</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointment>
+          <tr>
+            <td>{{ appointment.appointmentDate | date }}</td>
+            <td>{{ appointment.patientName }}</td>
+            <td>{{ appointment.reason }}</td>
+            <td>{{ appointment.status }}</td>
+            <td>
+              <button pButton icon="pi pi-search" label="View Details" (click)="viewAppointmentDetails(appointment)" class="p-button-text"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+    <!-- Appointment Details Dialog -->
+    <p-dialog header="Appointment Details" [(visible)]="displayDetailsDialog" [modal]="true" [responsive]="true" [style]="{width: '50vw'}">
+      <div *ngIf="selectedAppointment">
+        <h4>{{ selectedAppointment.patientName }} - {{ selectedAppointment.appointmentDate | date: 'fullDate' }}</h4>
+        <p><strong>Reason:</strong> {{ selectedAppointment.reason }}</p>
+        <p><strong>Status:</strong> {{ selectedAppointment.status }}</p>
+        <p><strong>Notes:</strong> {{ selectedAppointment.notes }}</p>
+      </div>
+      <p-footer>
+        <button pButton label="Close" icon="pi pi-times" (click)="displayDetailsDialog = false" class="p-button-secondary"></button>
+      </p-footer>
+    </p-dialog>
+  
+    <!-- Video Call Dialog -->
+    <p-dialog header="Video Call" [(visible)]="displayVideoDialog" [modal]="true" [responsive]="true" [style]="{width: '90vw', height: '60vw'}" [closable]="true" (onHide)="hideVideoDialog()">
+      <div class="video-chat-container">
+        <div class="participant-videos">
+          <div *ngFor="let participant of participants" class="video-box">
+            <video *ngIf="participant.videoStream"
+            [srcObject]="participant.videoStream" autoplay></video>
+            <p>{{ participant.name }}</p>
+          </div>
+        </div>
+        <div class="local-video-box">
+          <video #localVideo autoplay muted></video>
+          <!-- <p>You</p> -->
+        </div>
+          <div *ngIf="displayVideoDialog" class="call-controls-overlay">
+            <div class="overlay-control chat-control">
+  
+              <div *ngIf="isChatVisible" class="chat-section">
+                <h4>Chat</h4>
+                <div class="chat-messages">
+                  <div *ngFor="let msg of chatMessages" class="chat-message">{{ msg }}</div>
+                </div>
+                <input type="text" [(ngModel)]="newMessage" placeholder="Type your message..."  />
+                <button pButton label="Send" (click)="sendMessage()" class="p-button-success"></button>
+              </div>
+            </div>
+            <div class="overlay-control translator-control">
+             
+              <div *ngIf="isTranslatorActive" class="translator-section">
+                <p>Translator is active. Translation features will be added here.</p>
+              </div>
+            </div>
+            <!-- <div class="overlay-control effects-control">
+              <div *ngIf="isEffectsActive" class="effects-section">
+                <p>Select and apply background effects here.</p>
+                <div *ngFor="let effect of availableEffects" class="effect-option" (click)="applyEffect(effect)">
+                  <img [src]="effect.thumbnail" alt="Effect preview" />
+                  <p>{{ effect.name }}</p>
+                </div>
+              </div>
+              
+            </div> -->
+            <div class="overlay-control screen-share-control">
+             
+            </div>
+          </div>
+        </div>
+       
+      <p-footer>
+        <button pButton [icon]="isMuted ? 'pi pi-microphone-slash' : 'pi pi-microphone'" [label]="isMuted ? 'Unmute' : 'Mute'" (click)="toggleMute()" class="p-button-text"></button>
+        <button pButton [icon]="isVideoActive ? 'pi pi-video-slash' : 'pi pi-video'" [label]="isVideoActive ? 'Stop Video' : 'Start Video'" (click)="toggleVideo()" class="p-button-text"></button>
+        <button class="p-button p-button-info" (click)="toggleChat()">
+          <i class="pi" [ngClass]="isChatVisible ? 'pi-times' : 'pi-comment'"></i>
+        </button>
+        <button class="p-button p-button-primary" (click)="startScreenShare()">
+          <i class="pi pi-desktop"></i>
+        </button>
+        <button class="p-button p-button-info" (click)="toggleTranslator()">
+          <i class="pi" [ngClass]="isTranslatorActive ? 'pi-times' : 'pi-globe'"></i>
+        </button>
+        <!-- <button class="p-button p-button-warning" (click)="toggleEffects()">
+          <i class="pi" [ngClass]="isEffectsActive ? 'pi-times' : 'pi-cog'"></i>
+        </button> -->
+        <button pButton icon="pi pi-phone" label="Leave" (click)="leaveCall()" class="p-button-danger"></button>
+      </p-footer>
+    </p-dialog>
+  
+  
+  </div>
+  <p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>

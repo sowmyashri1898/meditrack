@@ -1,0 +1,54 @@
+<!-- <div class="messages-container">
+    <mat-card class="messages-card">
+      <mat-card-header>
+        <mat-card-title>Messages</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let message of messages">
+            <mat-icon matListIcon>email</mat-icon>
+            <div matLine>{{ message.patientName }}</div>
+            <div matLine>{{ message.date | date }}</div>
+            <div matLine>{{ message.subject }}</div>
+            <button mat-button (click)="onViewMessage(message)">View</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="message-detail-container">
+    <mat-card class="message-detail-card">
+      <mat-card-header>
+        <mat-card-title>Message from {{ message.patientName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ message.body }}</p>
+        <mat-divider></mat-divider>
+        <form (ngSubmit)="onSendReply()">
+          <mat-form-field class="full-width">
+            <mat-label>Reply</mat-label>
+            <textarea matInput [(ngModel)]="reply" name="reply" required></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!reply">Send Reply</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+   -->
+   <div *ngIf="messages.length > 0; else noMessages">
+    <h3>Sent Messages</h3>
+    <ul>
+      <li *ngFor="let message of messages">
+        <a [routerLink]="['/messages', message.id]">
+          <h4>{{ message.subject }}</h4>
+          <p>{{ message.body | slice:0:50 }}...</p>
+          <span>{{ message.createdDate }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noMessages>
+    <p>No sent messages found.</p>
+  </ng-template>
+  

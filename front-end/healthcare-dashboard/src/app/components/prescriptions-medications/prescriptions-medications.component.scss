@@ -1,0 +1,59 @@
+/* prescriptions.component.css */
+.container {
+    padding: 20px;
+    background-color: #f4f7fa;
+  }
+  
+  h2 {
+    color: #333;
+  
+    margin-bottom: 20px;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #2e3b4e;
+  }
+  
+  p-table {
+    margin-bottom: 20px;
+    background-color: black;
+  }
+  
+  .reminder-list {
+    margin-top: 20px;
+  }
+  
+  .reminder-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .medication-container {
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .medication-list {
+    margin-top: 20px;
+  }
+  
+  mat-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button {
+    margin-left: 20px;
+  }
+   

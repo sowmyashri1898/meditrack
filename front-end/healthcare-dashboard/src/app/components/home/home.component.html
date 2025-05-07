@@ -1,0 +1,231 @@
+<div class="home-container" style="display: flex;
+min-height: 100vh;
+flex-direction: column;">
+<app-chat></app-chat>
+    <main class="main-content" style=" flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;">
+        <section class="quick-actions">
+            <!-- <p-card  class="action-card">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-calendar-plus"></i> Patient Registration
+                </ng-template>
+                <button pButton label="Go" icon="pi pi-arrow-right" class="p-button-info"
+                    (click)="register()"></button>
+            </p-card> -->
+            <p-card class="action-card">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-calendar-plus"></i> Schedule Appointment
+                </ng-template>
+                <button pButton label="Go" icon="pi pi-arrow-right" class="p-button-success"
+                    (click)="scheduleAppointment()"></button>
+            </p-card>
+
+            <p-card class="action-card">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-pills"></i> Request Refill
+                </ng-template>
+                <button pButton label="Go" icon="pi pi-arrow-right" class="p-button-warning"
+                (click)="requestRefill()"></button>
+            </p-card>
+
+            <p-card class="action-card">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-file"></i> View Lab Results
+                </ng-template>
+                <button pButton label="Go" icon="pi pi-arrow-right" class="p-button-info"
+                (click)="labResult()"></button>
+            </p-card>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="overview">
+            <p-panel header="Upcoming Appointments" [toggleable]="true">
+                <ul>
+                  <li *ngFor="let appointment of upcomingAppointments">
+                    {{ appointment.doctorName }} - {{ appointment.formattedDate }}
+                  </li>
+                </ul>
+              </p-panel>
+
+            <p-panel header="Recent Test Results" [toggleable]="true">
+                <ul>
+                    <li>Blood Test - Completed - 11/10/2024</li>
+                    <li>X-Ray - Pending - 11/05/2024</li>
+                </ul>
+            </p-panel>
+
+            <p-panel header="Recent Messages" [toggleable]="true">
+                <ul>
+                    <li>Reminder for Appointment on 11/20</li>
+                    <li>Prescription Refill Status</li>
+                </ul>
+            </p-panel>
+        </section>
+
+        <!-- Health Insights Section -->
+        <section class="health-insights">
+            <p-card *ngFor="let insight of healthInsights" [header]="insight.title">
+                <p>{{ insight.value }}</p>
+                <p>{{ insight.recommendation }}</p>
+            </p-card>
+        </section>
+    </main>
+
+</div>
+
+<p-dialog header="Schedule Appointment" [(visible)]="displayScheduleDialog" [modal]="true"
+    (onHide)="onHideAppointment()" [responsive]="true" [style]="{width: '50vw'}">
+    <form [formGroup]="appointmentForm">
+        <div class="form-container" style="display: flex; flex-wrap: wrap; gap: 20px">
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="symptoms">Select Symptoms</label>
+                <p-multiSelect 
+                id="symptoms" 
+                formControlName="symptoms" 
+                [options]="symptomOptions" 
+                optionLabel="name" 
+                placeholder="Select Symptoms"
+                [filter]="true"
+                [showToggleAll]="false"
+                (onChange)="filterDoctorsBySymptoms()" 
+                [style]="{ width: '100%' }"
+              ></p-multiSelect>
+              
+              
+            </div>
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="location">Select Location</label>
+                <p-dropdown 
+                    id="location" 
+                    formControlName="location" 
+                    [options]="locations" 
+                    placeholder="Select Location"
+                    (onChange)="filterDoctorsBySymptoms()"
+                    [style]="{ width: '100%' }"
+                ></p-dropdown>
+            </div>
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="hospital">Select Hospital</label>
+                <p-dropdown 
+                    id="hospital" 
+                    formControlName="hospital" 
+                    [options]="hospitals" 
+                    placeholder="Select Hospital"
+                    (onChange)="filterDoctorsBySymptoms()" [style]="{ width: '100%' }"
+                ></p-dropdown>
+            </div>
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="appointmentDate">Appointment Date</label>
+                <p-calendar 
+                    id="appointmentDate" 
+                    formControlName="date" 
+                    [showIcon]="true" 
+                    [minDate]="minDate"
+                    class="custom-calendar" 
+                    appendTo="body" 
+                    [style]="{ width: '100%', maxWidth: '100%' }">
+                </p-calendar>
+            </div>
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="appointmentTime">Appointment Time</label>
+                <input id="appointmentTime" formControlName="time" type="time" class="p-inputtext p-component" style="width: 100%;" />
+            </div>
+
+            <div class="field" style="flex: 1 1 48%; display: flex; flex-direction: column;">
+                <label for="provider">Select Provider</label>
+                <p-dropdown 
+                  id="provider" 
+                  formControlName="provider" 
+                  [options]="filteredProviders"           
+                  optionLabel="name" 
+                  optionValue="id" 
+                  placeholder="Select a provider"
+                  [style]="{width: '100%'}" 
+                  (onChange)="filterDoctorsBySymptoms()">
+                </p-dropdown>
+              </div>
+              
+
+            <p-footer style="display: flex; justify-content: end; width: 100%;">
+                <button pButton label="Submit" icon="pi pi-check" (click)="submitAppointment()"
+                    class="p-button-success" [disabled]="appointmentForm.invalid" style="margin-left: auto;"></button>
+                <button pButton label="Clear" (click)="clear()" class="p-button-warning" style="margin-left: 1rem;">
+                </button>
+            </p-footer>
+        </div>
+    </form>
+  
+      
+</p-dialog>
+
+
+
+
+<p-dialog header="Request Medication Refill" 
+          [(visible)]="displayRequestRefillDialog" 
+          [modal]="true" 
+          [responsive]="true" 
+          [style]="{width: '40vw'}"
+          (onHide)="onHideRequestRefill()">
+
+  <form [formGroup]="refillForm">
+    <div class="form-container" style="display: flex;
+    flex-direction: column;
+    gap: 20px">
+      
+      <!-- Medication Selection -->
+      <div class="field" style="display: flex;
+  flex-direction: column;">
+        <label for="medication">Medication</label>
+        <p-dropdown [options]="medications" formControlName="medication" placeholder="Select Medication" optionLabel="name" filter="true" filterBy="name"></p-dropdown>
+
+      </div>
+
+      <!-- Dosage Selection -->
+      <div class="field" style="display: flex;
+  flex-direction: column;">
+        <label for="dosage">Dosage</label>
+        <!-- <input id="dosage" formControlName="dosage" type="text" 
+               class="p-inputtext p-component" placeholder="Enter dosage (e.g., 10mg)" /> -->
+               <p-dropdown [options]="dosages" formControlName="dosage" placeholder="Select Dosage" optionLabel="dosage" filter="true" filterBy="dosage"></p-dropdown>
+
+      </div>
+
+      <div class="field" style="display: flex;
+  flex-direction: column;">
+        <label for="quantity">Quantity</label>
+        <input id="quantity" formControlName="quantity" type="number" 
+               class="p-inputtext p-component" placeholder="Enter quantity" />
+      </div>
+
+      <!-- Refill Notes -->
+      <div class="field" style="display: flex;
+  flex-direction: column;">
+        <label for="refillNotes">Additional Notes</label>
+        <textarea id="refillNotes" formControlName="refillNotes" 
+                  class="p-inputtext p-component" rows="4" placeholder="Enter any additional notes"></textarea>
+      </div>
+
+      <p-footer style="display: flex; justify-content: end;">
+        <button pButton label="Submit" icon="pi pi-check" 
+                (click)="submitRefillRequest()" class="p-button-success" 
+                [disabled]="refillForm.invalid"></button>
+        <button pButton label="Clear" (click)="clearForm()" class="p-button-warning" 
+                style="margin-left: 1rem;"></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>
+
+<div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+  
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>

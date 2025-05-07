@@ -1,0 +1,136 @@
+<div class="profile-container" *ngIf="!isEditMode">
+  <div class="card-wrapper">
+    <mat-card class="profile-card">
+      <mat-card-header class="header-container">
+        <div class="profile-image-container">
+          <ng-container *ngIf="selectedImageUrl; else noImage">
+            <img [src]="selectedImageUrl" alt="Profile Picture" class="profile-image" />
+          </ng-container>
+          <ng-template #noImage>
+            <p>No profile picture available.</p>
+          </ng-template>
+        </div>
+        <mat-card-title>{{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ doctor.specialization }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ doctor.bio }}</p>
+        <mat-divider></mat-divider>
+        <div class="profile-details">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListIcon>email</mat-icon>
+              <p matLine>{{ doctor.email }}</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>phone</mat-icon>
+              <p matLine>{{ doctor.phoneNumber }}</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>location_on</mat-icon>
+              <p matLine>{{ doctor.location }}</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>business</mat-icon>
+              <p matLine>{{ doctor.hospitalName }}</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>calendar_today</mat-icon>
+              <p matLine>{{ doctor.experienceYears }} years</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="onEdit()">Edit Profile</button>
+        <button mat-button color="warn" (click)="onLogout()">Logout</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div class="edit-profile-container" *ngIf="isEditMode">
+  <div class="card-wrapper">
+    <mat-card class="edit-profile-card">
+      <mat-card-header>
+        <mat-card-title>Edit Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <!-- Profile Picture -->
+          <div class="profile-picture-container">
+            <label for="profilePicture">Doctor Image</label>
+            <input id="profilePicture" type="file" (change)="onFileSelected($event)" />
+            <div *ngIf="selectedImageUrl" class="profile-image-preview">
+              <img [src]="selectedImageUrl" alt="Doctor Image" class="edit-profile-image" />
+            </div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="form-grid">
+            <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Specialization</mat-label>
+              <p-dropdown 
+              formControlName="specialization" 
+              [options]="specialties" 
+              placeholder="Select Specialty" 
+              optionLabel="name"  
+              optionValue="name"  
+              appendTo="body">
+          </p-dropdown>
+          
+  
+              <input matInput formControlName="specialization" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Experience (years)</mat-label>
+              <input matInput formControlName="experienceYears" type="number" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Location</mat-label>
+              <input matInput formControlName="location" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Hospital Name</mat-label>
+              <input matInput formControlName="hospitalName" />
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+                <mat-option value="Other">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Buttons -->
+          <footer class="form-footer">
+            <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Save Changes</button>
+            <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+          </footer>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

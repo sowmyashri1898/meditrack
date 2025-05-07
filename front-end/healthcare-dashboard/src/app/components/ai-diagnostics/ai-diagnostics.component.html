@@ -1,0 +1,19 @@
+<div class="ai-diagnostics">
+    <h2>AI Diagnostics Results</h2>
+    <div class="diagnostic-cards">
+      <div *ngFor="let result of aiResults">
+        <div class="card">
+          <h3>{{ result.condition }}</h3>
+          <p>Prediction: {{ result.prediction }}</p>
+          <p>Confidence: {{ result.confidence }}%</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Upload Section for New Image -->
+    <div class="upload-section">
+      <input type="file" (change)="onFileSelected($event)">
+      <button (click)="uploadImage()">Upload and Analyze</button>
+    </div>
+  </div>
+  

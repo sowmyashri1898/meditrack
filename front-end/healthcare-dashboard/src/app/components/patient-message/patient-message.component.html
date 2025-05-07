@@ -1,0 +1,17 @@
+<div *ngIf="messages.length > 0; else noMessages">
+    <h3>Inbox</h3>
+    <ul>
+      <li *ngFor="let message of messages">
+        <a [routerLink]="['/messages', message.id]">
+          <h4>{{ message.subject }}</h4>
+          <p>{{ message.body | slice:0:50 }}...</p>
+          <span>{{ message.createdDate }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noMessages>
+    <p>No messages found.</p>
+  </ng-template>
+  

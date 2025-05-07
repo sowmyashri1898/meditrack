@@ -1,0 +1,24 @@
+<form [formGroup]="guardianForm" (ngSubmit)="onSubmit()">
+  <h1>Profile Registration</h1>
+  <div>
+    <label for="firstName">First Name</label>
+    <input id="firstName" formControlName="firstName" type="text" />
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input id="lastName" formControlName="lastName" type="text" />
+  </div>
+  <div>
+    <label for="contactNumber">Contact Number</label>
+    <input id="contactNumber" formControlName="contactNumber" type="text" />
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" />
+  </div>
+  <div>
+    <label for="relationship">Relationship</label>
+    <input id="relationship" formControlName="relationship" type="text" />
+  </div>
+  <button type="submit" [disabled]="guardianForm.invalid">Register Guardian</button>
+</form>

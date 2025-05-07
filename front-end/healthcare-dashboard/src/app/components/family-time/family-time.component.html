@@ -1,0 +1,54 @@
+<!-- <div class="family-time-container">
+    <h2>Family Time</h2>
+  
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Upcoming Family Visits</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul>
+          <li *ngFor="let visit of familyVisits">
+            <p>{{ visit.name }} - {{ visit.date | date:'short' }}
+            <button style="color: lightsalmon; margin-left: 2rem;" mat-raised-button color="accent">Confirm Visit</button></p>
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+   --><div *ngIf="isLoading" class="loading">
+  Loading visits...
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && visits.length > 0">
+  <h2>Your Scheduled Visits</h2>
+  <p-table [value]="visits" [paginator]="true" [rows]="5" [responsiveLayout]="'scroll'">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Visit Type</th>
+        <th>Details</th>
+        <!-- <th>Date</th> -->
+        <th>Online</th>
+        <th>Meet Link</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-visit>
+      <tr>
+        <td>{{ visit.visitType }}</td>
+        <td>{{ visit.visitDetails }}</td>
+        <!-- <td>{{ visit.visitDate | date: 'short' }}</td> -->
+        <td>{{ visit.isOnline ? 'No' : 'Yes' }}</td>
+        <td>
+          <a *ngIf="visit.zoomLink" [href]="visit.zoomLink" target="_blank">Join Meet</a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div *ngIf="!isLoading && visits.length === 0">
+  <p>No scheduled visits found.</p>
+</div>

@@ -1,0 +1,77 @@
+.contact {
+  background: linear-gradient(135deg, #d1ced1 0%, #e7d5db 100%); /* Gradient background */
+    padding: 4rem 0; 
+    text-align: center;
+  }
+  
+  .contact h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333; 
+    margin-bottom: 2rem;
+  }
+  
+  .contact .p-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .contact .p-field {
+    width: 100%;
+    max-width: 600px; 
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact .p-field label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555; 
+    display: block; 
+    margin-bottom: 0.5rem; 
+  }
+  
+  .contact input, 
+  .contact textarea {
+    width: 100%;
+    padding: 0.75rem; 
+    font-size: 1rem;
+    border-radius: 8px; 
+    border: 1px solid #ddd; 
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; 
+  }
+  
+  .contact input:focus, 
+  .contact textarea:focus {
+    border-color: #007bff; 
+    outline: none;
+  }
+  
+  .contact textarea {
+    resize: vertical; 
+  }
+  
+  .contact .p-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem; 
+    border-radius: 50px; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact .p-button:hover {
+    background-color: #0056b3; 
+  }
+  
+  @media (max-width: 768px) {
+    .contact h2 {
+      font-size: 1.5rem; 
+    }
+  
+    .contact .p-field {
+      width: 90%; 
+      max-width: 100%; 
+    }
+  }
+  

@@ -1,0 +1,182 @@
+<div class="button-container">
+  <button pButton type="button" label="Add Housekeeping Task" icon="pi pi-plus" (click)="openDialog()"></button>
+</div>
+
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [modal]="true"
+  [header]="'Add Housekeeping Task'"
+  [style]="{ width: '50vw' }"
+  (onHide)="closeDialog()"
+  headerStyle="{ 'background-color': '#007ad9', 'color': 'white' }"
+>
+  <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="serviceType">Service Type</label>
+        <p-dropdown
+          id="serviceType"
+          formControlName="serviceType"
+          [options]="serviceTypes"
+          placeholder="Select a Service Type"
+        ></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="startTime">Start Time</label>
+        <p-calendar
+          id="startTime"
+          formControlName="startTime"
+          [showTime]="true"
+          placeholder="Select Start Time"
+        ></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="endTime">End Time</label>
+        <p-calendar
+          id="endTime"
+          formControlName="endTime"
+          [showTime]="true"
+          placeholder="Select End Time"
+        ></p-calendar>
+      </div>
+      <div class="p-field">
+        <label for="frequency">Frequency</label>
+        <p-dropdown
+          id="frequency"
+          formControlName="frequency"
+          [options]="frequencies"
+          placeholder="Select Frequency"
+        ></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="residentRoomDetails">Resident Room Details</label>
+        <input
+          pInputText
+          id="residentRoomDetails"
+          formControlName="residentRoomDetails"
+          placeholder="Enter Resident Room Details"
+        />
+      </div>
+      <div class="p-field">
+        <label for="commonArea">Common Area</label>
+        <input
+          pInputText
+          id="commonArea"
+          formControlName="commonArea"
+          placeholder="Enter Common Area"
+        />
+      </div>
+      <div class="p-field">
+        <label for="specialRequests">Special Requests</label>
+        <textarea
+          pInputTextarea
+          id="specialRequests"
+          formControlName="specialRequests"
+          rows="3"
+          placeholder="Enter Special Requests"
+        ></textarea>
+      </div>
+      <div class="p-field">
+        <label for="priorityLevel">Priority Level</label>
+        <p-dropdown
+          id="priorityLevel"
+          formControlName="priorityLevel"
+          [options]="priorities"
+          placeholder="Select Priority Level"
+        ></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="supervisor">Supervisor</label>
+        <input
+          pInputText
+          id="supervisor"
+          formControlName="supervisor"
+          placeholder="Enter Supervisor Name"
+        />
+      </div>
+      <div class="p-field">
+        <label for="checklist">Checklist</label>
+        <textarea
+          pInputTextarea
+          id="checklist"
+          formControlName="checklist"
+          rows="3"
+          placeholder="Enter Checklist Items"
+        ></textarea>
+      </div>
+      <div class="button-group">
+        <button
+          pButton
+          type="submit"
+          label="Add Task"
+          icon="pi pi-check"
+          class="p-button-success"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-secondary"
+          (click)="closeDialog()"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<p-table [value]="tasks">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="background-color: black; color: white;">Service Type</th>
+      <th style="background-color: black; color: white;">Start Time</th>
+      <th style="background-color: black; color: white;">End Time</th>
+      <th style="background-color: black; color: white;">Frequency</th>
+      <th style="background-color: black; color: white;">Resident Room Details</th>
+      <th style="background-color: black; color: white;">Common Area</th>
+      <th style="background-color: black; color: white;">Special Requests</th>
+      <th style="background-color: black; color: white;">Priority Level</th>
+      <th style="background-color: black; color: white;">Supervisor</th>
+      <th style="background-color: black; color: white;">Checklist</th>
+      <th style="background-color: black; color: white;">Status</th>
+
+      <th style="background-color: black; color: white;">Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-task>
+    <tr>
+      <td>{{ task.serviceType }}</td>
+      <td>{{ task.startTime | date: 'short' }}</td>
+      <td>{{ task.endTime | date: 'short' }}</td>
+      <td>{{ task.frequency }}</td>
+      <td>{{ task.residentRoomDetails }}</td>
+      <td>{{ task.commonArea }}</td>
+      <td>{{ task.specialRequests }}</td>
+      <td>{{ task.priorityLevel }}</td>
+      <td>{{ task.supervisor }}</td>
+      <td>{{ task.checklist }}</td>
+      <td>{{ task.active ? 'Active' : 'Deleted' }}</td>
+
+      <td>
+        <button
+          pButton
+          icon="pi pi-pencil"
+          label="Edit"
+          (click)="editTask(task)"
+          class="p-button-text"
+          [disabled]="!task.active"
+
+        ></button>
+        <button
+          pButton
+          icon="pi pi-times"
+          label="Delete"
+          (click)="deleteTask(task)"
+          class="p-button-danger"
+          [disabled]="!task.active"
+
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

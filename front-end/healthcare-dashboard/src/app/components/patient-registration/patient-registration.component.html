@@ -1,0 +1,202 @@
+
+<div class="profile-container" *ngIf="!isEditMode">
+  <mat-card class="profile-card">
+    <mat-card-header>
+
+      <div style="display: flex; justify-content: flex-end; margin-left: 210px;">
+        <div *ngIf="selectedImageUrl; else noImage">
+          <img [src]="selectedImageUrl" alt="Profile Picture" style="max-width: 150px; max-height: 150px;" />
+        </div>
+      </div>
+      
+      <ng-template #noImage>
+        <p>No profile picture available.</p>
+      </ng-template>      <mat-card-title>{{ patient.firstName }} {{ patient.lastName }}</mat-card-title>
+      <mat-card-subtitle>{{ patient.gender }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ patient.patientImage }}</p>
+      <mat-divider></mat-divider>
+      <div class="profile-details">
+        <ul>
+          <li><strong>Phone:</strong> {{ patient?.contactNumber || 'Not available' }}</li>
+          <li><strong>Location:</strong> {{ patient?.address || 'Not available' }}</li>
+          <li><strong>Date of Birth:</strong> {{ patient?.dob }}</li>
+          <li><strong>Height:</strong> {{ patient?.height || 'Not available' }} cm</li>
+          <li><strong>Weight:</strong> {{ patient?.weight || 'Not available' }} kg</li>
+          <li><strong>Heart Rate:</strong> {{ patient?.heartRate || 'Not available' }}</li>
+          <li><strong>Blood Pressure:</strong> {{ patient?.bloodPressure || 'Not available' }}</li>
+          <li><strong>Temperature:</strong> {{ patient?.temperature || 'Not available' }}</li>
+          <li><strong>Allergies:</strong> {{ patient?.allergies || 'Not available' }}</li>
+          <li><strong>Current Medications:</strong> {{ patient?.currentMedications || 'Not available' }}</li>
+          <li><strong>Previous Diseases:</strong> {{ patient?.previousDiseases || 'Not available' }}</li>
+        </ul> 
+        <!-- <mat-list>
+            <mat-list-item *ngFor="let detail of patientDetails">
+              <mat-icon matListIcon>{{ detail.icon }}</mat-icon>
+                            <p>{{ detail.value }}</p>
+
+              <p>{{ detail.value }}</p>
+            </mat-list-item>
+          </mat-list> -->
+          
+        
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="onEdit()">Edit Profile</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="edit-profile-container" *ngIf="isEditMode">
+  <mat-card class="edit-profile-card">
+    <mat-card-header>
+      <mat-card-title>Edit Patient Profile</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="patientImage">Patient Image</label>
+          <input id="patientImage" type="file" (change)="onFileSelected($event)" />
+          <div *ngIf="selectedImageUrl">
+            <img [src]="selectedImageUrl" alt="Patient Image" style="width: 150px; height: auto; margin-top: 10px; border-radius: 8px;" />
+          </div>
+        </div>
+        
+        <mat-form-field class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName">
+        </mat-form-field>
+
+        <!-- Date of Birth -->
+        <!-- <mat-form-field class="full-width">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput formControlName="dob" type="date">
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="contactNumber">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Height (cm)</mat-label>
+          <input matInput formControlName="height" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Weight (kg)</mat-label>
+          <input matInput formControlName="weight" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Blood Pressure</mat-label>
+          <input matInput formControlName="bloodPressure" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Heart Rate</mat-label>
+          <input matInput formControlName="heartRate" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Temperature</mat-label>
+          <input matInput formControlName="temperature" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Allergies</mat-label>
+          <input matInput formControlName="allergies">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Current Medications</mat-label>
+          <input matInput formControlName="currentMedications">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Previous Diseases</mat-label>
+          <input matInput formControlName="previousDiseases">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Dietary Preferences</mat-label>
+          <input matInput formControlName="dietaryPreferences">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Is Resident</mat-label>
+          <mat-select formControlName="isResident">
+            <mat-option [value]="true">Yes</mat-option>
+            <mat-option [value]="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+
+        <mat-form-field class="full-width">
+          <mat-label>Room Number</mat-label>
+          <input matInput formControlName="roomNumber">
+        </mat-form-field>
+
+        <div formGroupName="guardian">
+          <h3>Guardian Details</h3>
+
+          <mat-form-field class="full-width">
+            <mat-label>Guardian's First Name</mat-label>
+            <input matInput formControlName="guardianFirstName">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Guardian's Last Name</mat-label>
+            <input matInput formControlName="guardianLastName">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Guardian's Contact Number</mat-label>
+            <input matInput formControlName="phoneNumber">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Guardian's Email</mat-label>
+            <input matInput formControlName="guardianEmail" type="email">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Relationship with Guardian</mat-label>
+            <input matInput formControlName="relationship">
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="patientForm.invalid">Save Changes</button>
+        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

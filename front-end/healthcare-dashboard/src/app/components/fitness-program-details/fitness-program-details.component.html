@@ -1,0 +1,23 @@
+<app-old-age-header></app-old-age-header>
+<div class="row mb-3">
+    <div class="col-md-6">
+      <label for="difficultyFilter">Difficulty Level:</label>
+      <select id="difficultyFilter" [(ngModel)]="selectedDifficulty" (change)="applyFilters()" class="form-select">
+        <option value="">All Levels</option>
+        <option *ngFor="let level of difficultyLevels" [value]="level">{{ level }}</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="typeFilter">Activity Type:</label>
+      <select id="typeFilter" [(ngModel)]="selectedType" (change)="applyFilters()" class="form-select">
+        <option value="">All Types</option>
+        <option *ngFor="let type of activityTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+  </div>
+  <ul>
+    <li *ngFor="let program of filteredPrograms">
+      <strong>{{ program.name }}</strong>: {{ program.description }}
+    </li>
+  </ul>
+  

@@ -1,0 +1,20 @@
+
+<div class="dashboard">
+    <mat-card>
+      <mat-card-title style="padding: 2rem;">Appointments</mat-card-title>
+      <mat-card-content>
+        <ul>
+          <li *ngFor="let appointment of upcomingAppointments">
+            {{ appointment.patientName }} - {{ appointment.appointmentDate | date }}
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title style="padding: 2rem;">Messages</mat-card-title>
+      <mat-card-content>...</mat-card-content>
+    </mat-card>
+  
+  </div>
+  <router-outlet></router-outlet>

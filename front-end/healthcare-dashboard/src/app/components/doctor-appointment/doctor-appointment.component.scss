@@ -1,0 +1,93 @@
+/* Main Appointments Section */
+.appointments {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1000px;
+  }
+  
+  /* Heading Styles */
+  .appointments h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00796b;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Mat List Styling */
+  mat-list {
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* List Item Styling */
+  mat-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 5px 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover Effect */
+  mat-list-item:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Mat Line Content Styling */
+  mat-list-item h3, mat-list-item p {
+    font-size: 1.1em;
+    margin: 0;
+  }
+  
+  /* Patient Name Styling */
+  mat-list-item h3 {
+    color: #00796b;
+    font-weight: bold;
+  }
+  
+  /* Appointment Date Styling */
+  mat-list-item p {
+    color: #757575;
+    font-size: 1em;
+    text-align: right;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    /* Adjust padding and margins for smaller screens */
+    .appointments {
+      padding: 15px;
+      margin: 10px;
+    }
+  
+    /* Adjust the font size for smaller devices */
+    .appointments h2 {
+      font-size: 1.5em;
+    }
+  
+    /* Adjust mat-list-item layout */
+    mat-list-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    mat-list-item h3 {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+  
+    mat-list-item p {
+      font-size: 0.9em;
+      text-align: left;
+    }
+  }
+  

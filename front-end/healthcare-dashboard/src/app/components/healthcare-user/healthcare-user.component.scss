@@ -1,0 +1,166 @@
+/* General Styles for the Healthcare User Component */
+.p-card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .p-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .p-field {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .p-dialog .p-footer {
+    text-align: center;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+  
+  /* Styling for the Table */
+  .p-table {
+    margin-top: 10px;
+  }
+  
+  .p-table th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .p-table td {
+    vertical-align: middle;
+  }
+  
+  .p-button {
+    margin: 0 5px;
+  }
+  
+  .p-button-success {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .p-button-warning {
+    background-color: #FF9800;
+    color: white;
+  }
+  
+  .p-button-danger {
+    background-color: #F44336;
+    color: white;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .p-fluid {
+      flex-direction: column;
+    }
+  
+    .p-field {
+      width: 100%;
+    }
+  
+    .p-table th, .p-table td {
+      font-size: 14px;
+    }
+  
+    .p-button {
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .p-table th, .p-table td {
+      font-size: 12px;
+    }
+    .p-field {
+      margin-bottom: 15px;
+    }
+  }
+  
+  /* Custom Styles for Form Inputs */
+  input, textarea, .p-dropdown {
+    width: 100%;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+  
+  /* Dropdown Custom Styling */
+  .p-dropdown {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* File Upload Style */
+  .p-file-upload {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  /* Card Styling for Form */
+  .p-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .p-card-header {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .p-card-footer {
+    text-align: center;
+  }
+  
+  /* For the Action buttons in the Table */
+  .p-button-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .p-button-warning, .p-button-danger {
+    margin-right: 5px;
+  }
+  
+  /* Adding Margin for the Dialog */
+  .p-dialog {
+    width: 40%;
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  /* Table Styling */
+  .p-table .p-sortable-column {
+    cursor: pointer;
+  }
+  
+  .p-table thead th {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f4f4f4;
+  }
+  
+  /* Media Query for Larger Screens (to optimize layout) */
+  @media (min-width: 1200px) {
+    .p-card {
+      padding: 30px;
+    }
+    .p-dialog {
+      width: 50%;
+    }
+  }
+  
+  

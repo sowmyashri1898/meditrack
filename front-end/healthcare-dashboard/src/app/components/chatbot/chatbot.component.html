@@ -1,0 +1,24 @@
+<!-- <div id="chatbot-container" style="height: 400px; width: 100%;">
+    
+</div> -->
+<!-- src/app/components/chatbot/chatbot.component.html -->
+<div class="chat-container">
+    <div class="chat-box">
+      <div class="messages">
+        <div *ngFor="let message of botMessage" class="bot-message">
+          <p>{{ message }}</p>
+        </div>
+        <div *ngIf="loading" class="loading-message">
+          <p>...loading</p>
+        </div>
+      </div>
+      <div class="user-input">
+        <input [(ngModel)]="userMessage" placeholder="Ask me anything..." (keydown.enter)="sendMessage()" />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  <button class="chatbot-toggle" (click)="toggleChatbot()">💬</button>
+
+
+  

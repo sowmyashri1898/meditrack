@@ -1,0 +1,33 @@
+<div class="games-container">
+  <h2>House-Keeping</h2>
+
+  <div class="games-list">
+    <mat-card *ngFor="let house of events; let i = index">
+      <mat-card-header>
+        <mat-card-title
+          >{{ house.serviceType }}</mat-card-title>
+
+          <span style="justify-content: flex-end; margin-bottom: 0.7rem;"
+            [ngClass]="{
+              'status-active': house.active,
+              'status-deleted': !house.active
+            }"
+            class="status-badge"
+          >
+            {{ house.active ? "Active" : "Deleted" }}
+          </span>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ house.frequency }}</p>
+        <p>{{ house.checklist }}</p>
+        <p>{{ house.commonArea }}</p>
+        <p>{{ house.supervisor }}</p>
+        <p>{{ house.startTime | date : "short" }}</p>
+        <p>{{ house.endTime | date : "short" }}</p>
+        <p>{{ house.specialRequests }}</p>
+        <p>{{ house.residentRoomDetails }}</p>
+        <p>{{ house.priorityLevel }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

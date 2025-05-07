@@ -1,0 +1,12 @@
+<div class="notifications-container mt-5">
+    <h2>Notifications</h2>
+    <div *ngIf="notifications.length > 0">
+      <h3>Notifications</h3>
+      <ul>
+        <li *ngFor="let notification of notifications">{{ notification }}</li>
+      </ul>
+    </div>
+    
+ 
+  </div>
+  

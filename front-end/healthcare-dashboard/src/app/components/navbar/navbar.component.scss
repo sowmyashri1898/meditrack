@@ -1,0 +1,191 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-content {
+  font-size: 24px;
+  text-align: center;
+  flex-grow: 1;
+  height: auto;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.user-name {
+  margin-right: 9px;
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  // margin-left: 15px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-button:hover {
+  color: #ffd700;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+// .notifications-dropdown {
+//   position: absolute;
+//   top: 60px;
+//   right: 20px;
+//   overflow-y: auto; /* Enable vertical scrolling */
+
+//   background-color: white;
+//   color: black;
+//   border: 1px solid #ccc;
+//   padding: 10px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//   z-index: 100;
+//   width: 250px;
+// }
+
+// .notifications-dropdown h4 {
+//   margin-top: 0;
+// }
+
+// .notifications-dropdown ul {
+//   list-style-type: none;
+//   padding: 0;
+// }
+
+// .notifications-dropdown li {
+//   padding: 5px 0;
+//   border-bottom: 1px solid #f0f0f0;
+// }
+
+// .notifications-dropdown button {
+//   margin-top: 10px;
+//   padding: 6px 12px;
+//   background-color: #007bff;
+//   border: none;
+//   color: white;
+//   cursor: pointer;
+// }
+
+// .notifications-dropdown button:hover {
+//   background-color: #0056b3;
+// }
+
+.notifications-dropdown {
+  position: absolute; /* Adjust based on your layout */
+  top: 50px; /* Distance from the top */
+  right: 10px; /* Align to the right */
+  width: 300px;
+  max-height: 400px; /* Set max height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px;
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.notification-list li:last-child {
+  border-bottom: none;
+}
+
+button {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .navbar-left {
+    display: none;  
+  }
+
+  .menu-icon {
+    display: block;  
+  }
+
+  .main-content {
+    margin-top: 40px; 
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar-left {
+    display: flex; 
+  }
+
+  .menu-icon {
+    display: inline-flex;  
+  }
+  /* Add this CSS to control the profile image size */
+.profile-picture {
+  width: auto; /* Maintain aspect ratio */
+  height: 100%; /* Responsive sizing */
+  max-width: 100px; /* Limit the maximum width */
+  max-height: 100px; /* Limit the maximum height */
+  border-radius: 50%; /* Optional: makes the image round */
+}
+
+}
+.p-breadcrumb {
+  margin-left: 20px;
+}
+
+.p-breadcrumb .p-breadcrumb-item a {
+  font-size: 14px;
+  color: #007bff;
+}
+
+.p-breadcrumb .p-breadcrumb-item a:hover {
+  text-decoration: underline;
+}

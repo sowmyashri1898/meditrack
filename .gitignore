@@ -1,0 +1,127 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.py[cod]
+*.so
+*.dylib
+*.egg
+*.egg-info
+dist/
+build/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+*.env
+*.venv
+*.virtualenv
+*.envrc
+.envrc
+
+# Windows
+Thumbs.db
+Desktop.ini
+*.bak
+*.swp
+*.swo
+*.swn
+*.tmp
+*.log
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*.tmp
+*.log
+
+# Linux
+*.swp
+*.swo
+*.tmp
+*.log
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs (e.g., PyCharm, IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.metadata/
+*.log
+*.bak
+*.tmp
+*.swp
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+*.tgz
+
+# Docker
+docker-compose.override.yml
+docker-compose.local.yml
+Dockerfile*
+.dockerignore
+
+# Virtual environment
+venv/
+ENV/
+env/
+*.venv
+
+# Rasa
+rasa_env/
+*.rasa/
+
+# IDE specific files
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.project
+*.classpath
+*.cproject
+
+# Log files
+*.log
+
+# Environment files
+.env
+
+# Build and distribution directories
+dist/
+build/
+*.egg-info
+*.egg
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+*.log
+*.err
+
+# System files
+Thumbs.db
+Desktop.ini
+*.swp
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+target/
+*.jar
+*.class

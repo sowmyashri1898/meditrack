@@ -1,0 +1,124 @@
+<p-tabView [(activeIndex)]="activeTabIndex">
+    <!-- Inbox Tab -->
+    <p-tabPanel header="Inbox">
+      <div>
+        <h2>Inbox</h2>
+        <!-- <div class="header" [formGroup]="searchFilterForm" style="padding-top: 1rem;">
+
+        <p-dropdown [options]="filterOptions" formControlName="selectedFilter" placeholder="Filter by" optionLabel="label"></p-dropdown>
+</div> -->
+        <input type="text" pInputText placeholder="Search messages..." (input)="filterInboxMessages($event)" class="p-mb-3" />
+        <div style="padding-top: 1rem;">
+        <p-table [value]="filteredInboxMessages" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'" >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="background-color: black; color: white;">
+                <p-checkbox [(ngModel)]="selectAll" binary="true" (onChange)="toggleAllSelection()"></p-checkbox>
+              </th>
+              <th style="background-color: black; color: white;">Date</th>
+              <th style="background-color: black; color: white;">From</th>
+              <th style="background-color: black; color: white;">Content</th>
+              <th style="background-color: black; color: white;">Priority</th>
+              <th style="background-color: black; color: white;">Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-message>
+            <tr>
+              <td>
+                <p-checkbox [(ngModel)]="message.selected" binary="true"></p-checkbox>
+              </td>
+              <td>{{message.sentAt | date: 'short' }}</td>
+              <td>{{ message.sender.email }}</td>
+              <td>{{ message.content }}</td>
+              <td>
+                <span [ngClass]="{'high-priority': message.priority === 'HIGH', 'medium-priority': message.priority === 'MEDIUM', 'low-priority': message.priority === 'LOW'}">
+                  {{ message.priority }}
+                </span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                    <button pButton label="Archive" (click)="archiveMessage(message.id)" icon="pi pi-archive" class="p-button-text"></button>
+
+                    <p-button icon="pi pi-search" (click)="viewMessageDetails(message)" label="View" class="p-button-sm"></p-button>
+                    <p-button icon="pi pi-reply" (click)="replyToMessage(message)" label="Reply" class="p-button-sm"></p-button>
+                    <p-button icon="pi pi-check" (click)="markAsRead(message)" label="Mark as Read" *ngIf="!message.isRead" class="p-button-sm"></p-button>
+                    <p-button icon="pi pi-times" (click)="markAsUnread(message)" label="Mark as Unread" *ngIf="message.isRead" class="p-button-sm p-button-danger"></p-button>
+                  </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        </div>
+      </div>
+    </p-tabPanel>
+  
+    <!-- Outbox Tab -->
+    <p-tabPanel header="Outbox">
+      <div>
+        <h2>Outbox</h2>
+        <ul *ngIf="outboxMessages.length; else noOutboxMessages" class="p-list">
+          <li *ngFor="let message of outboxMessages" class="p-list-item">
+            <div>
+              <p><strong>To:</strong> {{ message.receiver.email }}</p>
+              <p>{{ message.content }}</p>
+              <p><strong>Priority:</strong>
+                <span [ngClass]="{'high-priority': message.priority === 'HIGH', 
+                                  'medium-priority': message.priority === 'MEDIUM', 
+                                  'low-priority': message.priority === 'LOW'}">
+                  {{ message.priority }}
+                </span>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <ng-template #noOutboxMessages>
+          <p>No messages found.</p>
+        </ng-template>
+      </div>
+    </p-tabPanel>
+  
+    <!-- Send Message Tab -->
+<p-tabPanel header="Send Message">
+  <div class="card">
+    <h2 style="justify-content: center;">Send Message</h2>
+    <form (ngSubmit)="sendMessage()" class="p-fluid send-message-form">
+
+      <div class="p-field">
+        <label for="senderIdentifier">Sender Email:</label>
+        <input id="senderIdentifier" type="email" pInputText [(ngModel)]="senderIdentifier" name="senderIdentifier" [value]="loggedInUserEmail" readonly />
+      </div>
+
+      <div class="p-field">
+        <label for="receiverIdentifier">Receiver Email or Username:</label>
+        <input id="receiverIdentifier" type="text" pInputText [(ngModel)]="receiverIdentifier" name="receiverIdentifier" required />
+      </div>
+
+      <div class="p-field">
+        <label for="content">Message:</label>
+        <textarea id="content" pInputTextarea [(ngModel)]="content" name="content" required></textarea>
+      </div>
+
+      <div class="p-field">
+        <label for="priority">Priority:</label>
+        <p-dropdown id="priority" [options]="priorityOptions" [(ngModel)]="priority" name="priority" appendTo="body"></p-dropdown>
+      </div>
+
+      <div class="button-container">
+        <button pButton type="submit" label="Send" icon="pi pi-send" class="p-button-success"></button>
+      </div>
+    </form>
+  </div>
+</p-tabPanel>
+
+  </p-tabView>
+  <p-dialog header="Message Details" [(visible)]="displayMessageDialog" [modal]="true"  [closable]="true"[style]="{width: '50vw'}">
+    <div>
+      <p><strong>From:</strong> {{ selectedMessage?.sender?.email }}</p>
+      <p><strong>To:</strong> {{ selectedMessage?.receiver?.email }}</p>
+      <p><strong>Priority:</strong> {{ selectedMessage?.priority }}</p>
+      <p><strong>Sent At:</strong> {{ selectedMessage?.sentAt | date: 'short' }}</p>
+      <p><strong>Content:</strong></p>
+      <p>{{ selectedMessage?.content }}</p>
+    </div>
+  </p-dialog>
+  

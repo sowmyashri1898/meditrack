@@ -1,0 +1,65 @@
+<div class="navbar">
+  <div class="navbar-left">
+<p-sidebar [(visible)]="isSidebarVisible" [baseZIndex]="10000" [modal]="true" [showCloseIcon]="false" [style]="{'width':'250px'}">
+  <p-menu [model]="items" (onItemClick)="onMenuItemClick($event)"></p-menu>
+
+</p-sidebar>
+
+
+    <button mat-button class="menu-icon" (click)="isSidebarVisible = !isSidebarVisible">
+      <i class="pi pi-bars"></i>
+    </button>
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+
+    <div *ngIf="selectedImageUrl; else noImage">
+      <img [src]="selectedImageUrl" alt="Profile Picture" class="profile-picture" />
+    </div>
+    <ng-template #noImage>
+      <p>No profile picture available.</p>
+    </ng-template>
+
+  </div>
+
+  <h1 class="navbar-content">Resident Portal</h1>
+
+  <div class="user-info">
+    <span class="user-name" *ngIf="latestPatient">Hello, {{ latestPatient.firstName }} {{ latestPatient.lastName }}</span>
+
+    <button type="button" pButton class="icon-button" (click)="toggleNotifications()">
+      <i class="pi pi-bell notification-icon"></i>
+    </button>
+
+    <button type="button" pButton icon="pi pi-user"  class="profile-btn"(click)="onProfile()">
+
+    </button>
+    <button class="icon-button" (click)="openSettings()">
+      <i class="pi pi-cog settings-icon"></i>
+    </button>
+
+    <button class="icon-button" (click)="logout()">
+      <i class="pi pi-sign-out logout-icon"></i>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="notificationsVisible" class="notifications-dropdown">
+  <h4>Notifications</h4>
+  <div *ngIf="notifications.length === 0; else notificationList">
+    <p>No new notifications.</p>
+  </div>
+  <ng-template #notificationList>
+    <ul class="notification-list">
+      <li *ngFor="let notification of notifications">
+        {{ notification.message || 'No message available' }}
+      </li>
+    </ul>
+  </ng-template>
+  <button (click)="markAllAsRead()">Mark all as read</button>
+</div>
+
+
+
+
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

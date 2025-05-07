@@ -1,0 +1,56 @@
+/* Footer Styles */
+.footer {
+  background: linear-gradient(135deg, #a4aca1 0%, #f8e3e93d 100%); /* Gradient background */
+    padding: 2rem 0;  /* Top and bottom padding */
+    color: #383535;  /* Dark grey text color */
+    border-top: 2px solid #ddd;  /* Light top border */
+    text-align: center;
+  }
+  
+  .footer p {
+    font-size: 1rem;  /* Standard font size for the text */
+    margin-bottom: 1rem;  /* Space below the paragraph */
+    color: #777;  /* Lighter grey text for copyright */
+  }
+  
+  .footer .social-icons {
+    list-style: none;  /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;  /* Center the social media icons */
+    gap: 20px;  /* Space between the icons */
+  }
+  
+  .footer .social-icons li {
+    display: inline-block;
+  }
+  
+  .footer .social-icons a {
+    font-size: 1.5rem;  /* Larger icons for social media */
+    color: #555;  /* Default icon color */
+    transition: color 0.3s ease;  /* Smooth color transition on hover */
+  }
+  
+  .footer .social-icons a:hover {
+    color: #007bff;  /* Change icon color to blue on hover */
+  }
+  
+  .footer .social-icons i {
+    vertical-align: middle;  /* Align icon vertically in the center */
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      padding: 1.5rem 0;  /* Adjust padding for smaller screens */
+    }
+  
+    .footer p {
+      font-size: 0.875rem;  /* Smaller text size on mobile */
+    }
+  
+    .footer .social-icons {
+      gap: 15px;  /* Slightly smaller gap on mobile */
+    }
+  }
+  

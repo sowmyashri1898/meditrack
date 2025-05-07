@@ -1,0 +1,127 @@
+/* Navbar Styling */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #c3d3d7 0%, #cac7a5 100%); /* Gradient background */
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.navbar-logo {
+  max-width: 50px; /* Maintain logo size */
+  border-radius: 5px;
+  box-shadow: #e8d827;
+  height: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-link {
+  color: #171616;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ff7f50; /* Highlight color on hover */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  color: rgb(15, 15, 15);
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-style: oblique;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.navbar-toggler {
+  border-color: #fff;
+}
+
+.navbar-toggler-icon {
+  background-color: #262525;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: rgb(66, 68, 74);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  color: #ff7f50;
+}
+
+.btn-link i {
+  font-size: 1.4rem;
+}
+
+.btn-link:hover i {
+  color: #ff7f50;
+}
+
+.btn-primary,
+.btn-outline-primary {
+  color: #fff;
+  background-color: #005f8c;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: #ff7f50;
+  border-color: #ff7f50;
+  color: #171616;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .nav-item {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 10px 5px;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .btn-link {
+    font-size: 1rem;
+  }
+}

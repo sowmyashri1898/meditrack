@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+    <!-- <h1>Welcome, Resident</h1> -->
+    <h1>Schedule for the Day</h1>
+
+    <!-- Schedule for the Day -->
+    <section class="schedule-section">
+      <!-- <h2>Schedule for the Day</h2> -->
+  
+      <!-- My Priority -->
+      <div class="section">
+        <h3>My Priority</h3>
+        <div class="grid">
+          <div *ngFor="let item of myPriority" class="card">
+            <a [routerLink]="[item.route]">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <p>{{ item.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Entertainment -->
+      <div class="section">
+        <h3>Entertainment</h3>
+        <div class="grid">
+          <div *ngFor="let item of entertainment" class="card">
+            <a [routerLink]="[item.route]">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <p>{{ item.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Generic -->
+      <div class="section">
+        <h3>Generic</h3>
+        <div class="grid">
+          <div *ngFor="let item of generic" class="card">
+            <a [routerLink]="[item.route]">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <p>{{ item.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

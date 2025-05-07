@@ -1,0 +1,277 @@
+body {
+  font-family: 'Arial', sans-serif;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero-section {
+  background: url('/assets/hero-section.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 150px 0;
+  color: white;
+  text-align: center;
+  position: relative;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5); 
+}
+
+.hero-section h1 {
+  font-size: 64px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Darker text shadow */
+}
+
+.hero-section p {
+  font-size: 22px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.hero-section .btn-primary {
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  font-size: 18px;
+  padding: 16px 35px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Button shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-section .btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Button hover effect */
+}
+
+/* Services Section */
+.services {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #8c9189 0%, #eccdde 100%); /* Gradient background */
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.service-card {
+  background-color: white;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // margin-bottom: 30px;
+  margin: 2%;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Enhanced hover effect */
+}
+
+.service-card i {
+  font-size: 40px;
+  color: #28a745; /* Healthcare icon color */
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.service-card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 80px 0;
+  background-color: #e9ecef;
+}
+
+.testimonials h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.testimonials blockquote {
+  font-style: italic;
+  font-size: 24px;
+  color: #a0aab6;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.testimonials p {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #343a40;
+}
+
+.testimonials .testimonial-card {
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #8c9189 0%, #eccdde 100%); /* Gradient background */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.testimonials .testimonial-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.testimonials img {
+  max-width: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* Appointment Section */
+.appointment {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #9fa7a1 0%, #9b9686 100%); /* Gradient background */
+  color: white;
+  text-align: center;
+}
+
+.appointment h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.appointment p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.appointment button {
+  font-size: 20px;
+  padding: 14px 30px;
+  background-color: #ffffff;
+  color: #28a745;
+  border: none;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.appointment button:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+}
+
+/* Contact Section */
+app-contact {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #343a40 0%, #e9efea 100%); /* Gradient background */
+
+  color: white;
+  text-align: center;
+}
+
+app-contact h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+app-contact p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+app-contact .btn-primary {
+  font-size: 18px;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #343a40 0%, #e9efea 100%); /* Gradient background */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+app-contact .btn-primary:hover {
+  background-color: #7b7761;
+}
+
+/* Footer */
+footer {
+  padding: 40px 0;
+  background: linear-gradient(135deg, #b79eb8 0%, #8c616f 100%); /* Gradient background */
+  color: rgb(188, 137, 123);
+  text-align: center;
+}
+
+footer p {
+  font-size: 16px;
+  color: #ddd;
+}
+
+.social-icons li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.social-icons i {
+  font-size: 30px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.social-icons i:hover {
+  color: #007bff;
+}
+
+/* Toast */
+p-toast {
+  z-index: 9999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 40px;
+  }
+
+  .hero-section p {
+    font-size: 18px;
+  }
+
+  .services h2 {
+    font-size: 28px;
+  }
+
+  .service-card i {
+    font-size: 30px;
+  }
+
+  .appointment h2 {
+    font-size: 28px;
+  }
+
+  .appointment p {
+    font-size: 18px;
+  }
+
+  footer {
+    padding: 30px 0;
+  }
+}

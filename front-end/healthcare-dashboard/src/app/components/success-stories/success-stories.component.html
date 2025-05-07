@@ -1,0 +1,73 @@
+<app-old-age-header></app-old-age-header>
+  
+  <section class="container my-5">
+    <h2 class="text-center">Resident Stories</h2>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let story of residentStories">
+        <p-card header="Resident Testimonial">
+          <p>{{ story.quote }}</p>
+          <p-footer>
+            <p><strong>{{ story.name }}</strong></p>
+          </p-footer>
+        </p-card>
+      </div>
+    </div>
+  </section>
+  
+  <section class="container my-5">
+    <h2 class="text-center">Family & Staff Stories</h2>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let story of familyStories">
+        <p-card header="Family/Staff Testimonial">
+          <p>{{ story.quote }}</p>
+          <p-footer>
+            <p><strong>{{ story.name }}</strong> - {{ story.role }}</p>
+          </p-footer>
+        </p-card>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Impact Metrics Section -->
+  <section class="container my-5">
+    <h2 class="text-center">Impact Metrics</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <p-card header="Physical Activity Increase">
+          <p class="text-center">
+            <i class="pi pi-heart" style="font-size: 3em;"></i>
+          </p>
+          <p-footer>
+            <p>{{ impactMetrics.physicalActivityIncrease }}%</p>
+          </p-footer>
+        </p-card>
+      </div>
+      <div class="col-md-4">
+        <p-card header="Cognitive Function Improvement">
+          <p class="text-center">
+            <i class="pi pi-brain" style="font-size: 3em;"></i>
+          </p>
+          <p-footer>
+            <p>{{ impactMetrics.cognitiveImprovement }}%</p>
+          </p-footer>
+        </p-card>
+      </div>
+      <div class="col-md-4">
+        <p-card header="Resident Satisfaction">
+          <p class="text-center">
+            <i class="pi pi-smile" style="font-size: 3em;"></i>
+          </p>
+          <p-footer>
+            <p>{{ impactMetrics.satisfaction }}%</p>
+          </p-footer>
+        </p-card>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer Section (same as Home Page) -->
+  <footer class="footer text-center py-3">
+    <p>&copy; 2024 Enhancing Resident Experiences. All rights reserved.</p>
+    <button pButton type="button" label="Contact Us" class="p-button-info" routerLink="/contact"></button>
+  </footer>
+  

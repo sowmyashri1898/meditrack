@@ -1,0 +1,23 @@
+<div class="patient-list">
+    <h2>Patient Records</h2>
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search Patients...">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Condition</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patients ">
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.condition }}</td>
+          <td><button (click)="viewPatientDetails(patient.id)">View Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,11 @@
+<div class="physio-container">
+    <h2>Physiotherapy</h2>
+  
+    <div *ngFor="let session of physiotherapySessions" class="session-card">
+      <h3>{{ session.type }}</h3>
+      <p>Date: {{ session.date | date:'short' }}</p>
+      <p>Time: {{ session.time | date:'shortTime' }}</p>
+      <button mat-raised-button color="primary" (click)="attendSession(session)">Attend Session</button>
+    </div>
+  </div>
+  

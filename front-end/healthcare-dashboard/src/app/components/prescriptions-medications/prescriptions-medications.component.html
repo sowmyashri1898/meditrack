@@ -1,0 +1,76 @@
+<p-tabView>
+
+
+  <p-tabPanel header="Medication List">
+    <div class="medication-container">
+      <h2>Medication Details</h2>
+      <div class="medication-list">
+        <!-- Material List -->
+        <mat-list *ngIf="medicationList.length > 0; else noDataTemplate">
+          <mat-list-item *ngFor="let medication of medicationList">
+            <div class="medication-info">
+              <h3>{{ medication.medicationName }}</h3>
+              <p>Dosage: {{ medication.dosageName }}</p>
+              <p>Instructions: {{ medication.instructions }}</p>
+            </div>
+            <button mat-raised-button color="primary" (click)="takeMedication(medication)">
+              Take Medication
+            </button>
+          </mat-list-item>
+        </mat-list>
+        <!-- No Data Template -->
+        <ng-template #noDataTemplate>
+          <p>No medications available.</p>
+        </ng-template>
+      </div>
+    </div>
+  </p-tabPanel>
+  
+  
+    <p-tabPanel header="Prescription Details">
+      <p-table class="medication-table" [value]="prescriptionDetails" [responsive]="true" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]">
+        <ng-template pTemplate="header" style="background-color: black;">
+          <tr>
+            <th style="background-color: black; color: white;">Medication Name</th>
+            <th style="background-color: black; color: white;">Dosage</th>
+            <th style="background-color: black; color: white;">Quantity</th>
+            <th style="background-color: black; color: white;" colspan="2">Morning</th>
+            <th style="background-color: black; color: white;" colspan="2">Afternoon</th>
+            <th style="background-color: black; color: white;" colspan="2">Night</th>
+            <th style="background-color: black; color: white;">Note</th>
+            <th style="background-color: black; color: white;">Action</th>
+          </tr>
+          <tr>
+            <th style="background-color: black; color: white;"></th>
+            <th style="background-color: black; color: white;"></th>
+            <th style="background-color: black; color: white;"></th>
+            <th style="background-color: black; color: white;">Before Food</th>
+            <th style="background-color: black; color: white;">After Food</th>
+            <th style="background-color: black; color: white;">Before Food</th>
+            <th style="background-color: black; color: white;">After Food</th>
+            <th style="background-color: black; color: white;">Before Food</th>
+            <th style="background-color: black; color: white;">After Food</th>
+            <th style="background-color: black; color: white;"></th>
+            <th style="background-color: black; color: white;"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-prescription>
+          <tr *ngFor="let medication of prescription.medications">
+            <td>{{ medication.medicationName }}</td>
+            <td>{{ medication.dosageName }}</td>
+            <td>{{ medication.quantity }}</td>
+            <td>{{ medication.morningBeforeFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.morningAfterFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.afternoonBeforeFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.afternoonAfterFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.nightBeforeFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.nightAfterFood ? 'Yes' : 'No' }}</td>
+            <td>{{ medication.note }}</td>
+            <td>
+              <p-button label="Request Refill" icon="pi pi-refresh" (click)="requestRefill(prescription)"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+</p-tabView>

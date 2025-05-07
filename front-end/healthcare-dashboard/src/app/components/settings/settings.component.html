@@ -1,0 +1,44 @@
+<div class="settings-container">
+  <h2 style="background-color: rgb(81, 134, 167);color: white;">Account Settings</h2>
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <!-- Full Name Field -->
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input id="email" type="email" pInputText formControlName="email" />
+    </div>
+
+    <!-- Old Password Field -->
+    <div class="form-group">
+      <label for="oldPassword">Old Password</label>
+      <input id="oldPassword" type="password" pInputText formControlName="oldPassword" />
+      <div *ngIf="settingsForm.get('oldPassword')?.invalid && settingsForm.get('oldPassword')?.touched">
+        <small *ngIf="settingsForm.get('oldPassword')?.hasError('required')">Old password is required</small>
+      </div>
+    </div>
+
+    <!-- New Password Field -->
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input id="newPassword" type="password" pInputText formControlName="newPassword" />
+      <div *ngIf="settingsForm.get('newPassword')?.invalid && settingsForm.get('newPassword')?.touched">
+        <small *ngIf="settingsForm.get('newPassword')?.hasError('required')">New password is required</small>
+        <small *ngIf="settingsForm.get('newPassword')?.hasError('minlength')">Password must be at least 6 characters</small>
+      </div>
+    </div>
+
+    <!-- Phone Field -->
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input id="phone" type="text" pInputText formControlName="phone" />
+    </div>
+
+    <!-- Submit Button -->
+    <button pButton type="submit" label="Save Changes" [disabled]="settingsForm.invalid"></button>
+  </form>
+</div>

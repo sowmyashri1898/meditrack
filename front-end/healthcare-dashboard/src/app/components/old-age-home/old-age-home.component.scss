@@ -1,0 +1,260 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #5a5454;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3 {
+    font-weight: bold;
+  }
+  
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  // Hero Section
+  .bg-primary {
+    background-color: #cedeef !important;
+  }
+  
+  .text-white {
+    color: white !important;
+  }
+  
+  .text-center {
+    text-align: center !important;
+  }
+  
+  .py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  button.p-button-warning {
+    background-color: #ffc107;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #e0a800;
+    }
+  }
+  
+  // Solutions Overview Section
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 200px; // Uniform image height
+    object-fit: cover; // Ensures the image covers the entire area without distorting
+  }
+  
+  .card-body {
+    padding: 15px;
+    background-color: #fff;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  // Related Apps Section
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;  // Adds space between each card
+    justify-content: space-between;
+  }
+  
+  .col-md-6,
+  .col-lg-3 {
+    width: 100%;
+    padding: 10px;
+  
+    // Medium devices (tablets)
+    @media (min-width: 768px) {
+      width: 40%;  // Two cards per row on tablets
+    }
+  
+    @media (min-width: 1200px) {
+      width: 20%;  // Four cards per row on desktops
+    }
+  }
+  
+  .p-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pi {
+    font-size: 4em;
+    color: #007bff;
+  }
+  
+  .material-icons {
+    font-size: 3em;
+    color: #007bff;
+  }
+  
+  .p-card-header {
+    font-size: 1.3rem;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+  
+  .p-card-footer {
+    font-size: 1rem;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  footer.bg-dark {
+    background-color: #b9bdc1;
+  }
+  
+  footer.text-white {
+    color: #fff;
+  }
+  
+  footer.py-3 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  footer button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  // Button Adjustments
+  button {
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 5px;
+  }
+  
+  button.p-button-info {
+    background-color: #17a2b8;
+  }
+  
+  button.p-button-success {
+    background-color: #28a745;
+  }
+  
+  button.p-button-warning {
+    background-color: #ffc107;
+  }
+  
+  button.p-button-info:hover {
+    background-color: #138496;
+  }
+  
+  button.p-button-success:hover {
+    background-color: #218838;
+  }
+  
+  button.p-button-warning:hover {
+    background-color: #e0a800;
+  }
+  
+  // Media Queries for Responsiveness
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+    }
+  
+    h3 {
+      font-size: 1.3rem;
+    }
+  
+    .card-body p {
+      font-size: 1rem;
+    }
+  
+    .row {
+      flex-direction: column;
+      gap: 10px;  // Reduces the gap on smaller screens
+    }
+  }
+  
+  @media (max-width: 576px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    h3 {
+      font-size: 1.2rem;
+    }
+  
+    .container {
+      padding: 0 15px;
+    }
+  }
+  

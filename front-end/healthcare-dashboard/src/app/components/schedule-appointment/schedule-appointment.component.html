@@ -1,0 +1,101 @@
+<div class="schedule-appointment">
+  <h2>Schedule Appointment</h2>
+  <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
+    <div class="column">
+      <!-- Specialty Dropdown -->
+      <label for="specialty">Specialty:</label>
+      <p-dropdown
+        formControlName="specialty"
+        [options]="specialties"
+        placeholder="Select Specialty"
+        optionLabel="name"
+        optionValue="name"
+        (onChange)="getDoctors()"
+      >
+      </p-dropdown>
+
+      <label for="hospitalName">Hospital Name:</label>
+      <p-dropdown
+        formControlName="hospitalName"
+        [options]="availableHospitals"
+        placeholder="Select Hospital"
+      >
+      </p-dropdown>
+
+      <label for="appointmentDate">Appointment Date:</label>
+      <p-calendar
+        formControlName="appointmentDate"
+        [showTime]="true"
+        appendTo="body"
+
+        placeholder="Select Date and Time"
+        [minDate]="currentDate"
+
+      >
+      </p-calendar>
+
+      
+
+      <!-- Reason Field -->
+      <label for="reason">Reason:</label>
+      <input
+      pInputText
+        formControlName="reason"
+        placeholder="Enter the reason for your appointment"
+        style="width: 100%;"
+      >
+      <label for="appointmentType">Appointment Type:</label>
+      <p-selectButton
+        formControlName="appointmentType"
+        [options]="appointmentTypes"
+        optionLabel="label"
+      >
+      </p-selectButton>
+    </div>
+
+    <!-- Second Column -->
+    <div class="column">
+      <label for="doctorId">Doctor:</label>
+      <p-dropdown
+        formControlName="doctorName"
+        [options]="doctors"
+        placeholder="Select Doctor"
+        optionLabel="firstName"
+      >
+      </p-dropdown>
+
+      <label for="location">Location:</label>
+      <p-dropdown
+        formControlName="location"
+        [options]="availableLocations"
+        placeholder="Select Location"
+      >
+      </p-dropdown>
+
+      <!-- <div class="field" > -->
+        <label for="appointmentTime">Appointment Time</label>
+        <input id="appointmentTime" formControlName="time" type="time" class="p-inputtext p-component" style="width: 100%;" />
+      <!-- </div> -->
+
+      <!-- Notes Field -->
+      <label for="notes">Notes:</label>
+      <input
+      type="text"
+      pInputText
+        formControlName="notes"
+        placeholder="Add any additional notes"
+        style="width: 100%;"
+      >
+      
+    </div>
+
+    <div class="submit-button">
+      <p-button
+        type="submit"
+        label="Schedule Appointment"
+        [disabled]="!appointmentForm.valid"
+      >
+      </p-button>
+    </div>
+  </form>
+</div>

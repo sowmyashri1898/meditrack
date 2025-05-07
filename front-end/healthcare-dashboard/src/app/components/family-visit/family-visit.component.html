@@ -1,0 +1,140 @@
+<div class="family-visit-section" style="display: flex; justify-content: flex-end; padding-top: 1rem; margin-bottom: 1rem;">
+  <button pButton label="Add New Family Visit" icon="pi pi-plus" class="p-button-outlined" (click)="AddVisit()"></button>
+</div>
+
+<div *ngIf="statusMessage" class="status-message">
+  <p class="success">{{ statusMessage }}</p>
+</div>
+
+<div class="family-visit-container">
+  <h3 class="section-title">Scheduled Family Visits</h3>
+
+  <p-table [value]="upcomingVisits" [responsive]="true" [paginator]="true" [rows]="5" class="custom-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Visit Date</th>
+        <th>Visit Type</th>
+        <th>Details</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-visit>
+      <tr>
+        <td>{{ visit.visitDate | date: 'medium' }}</td>
+        <td>{{ visit.visitType }}</td>
+        <td>{{ visit.visitDetails }}</td>
+        <td>
+          <span *ngIf="visit.isOnline; else offlineStatus">
+            <a [href]="visit.zoomLink" target="_blank" class="zoom-link">Join Zoom</a>
+          </span>
+          <ng-template #offlineStatus>
+            <span class="offline-status">Offline</span>
+          </ng-template>
+        </td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-warning" (click)="editVisit(visit)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-danger" (click)="deleteVisit(visit.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  header="{{ isEditMode ? 'Edit Family Visit Details' : 'Add Family Visit Details' }}"
+  [(visible)]="displayVisitDetailsDialog"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width: '50vw' }"
+  class="custom-dialog"
+>
+  <form [formGroup]="familyVisitForm" (ngSubmit)="saveVisit()">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="visitType">Visit Type</label>
+        <input
+          id="visitType"
+          pInputText
+          formControlName="visitType"
+          placeholder="Enter visit type"
+          required
+        />
+      </div>
+      <div class="form-field">
+        <label for="visitDate">Visit Date</label>
+        <input
+          id="visitDate"
+          type="datetime-local"
+          formControlName="visitDate"
+          required
+        />
+      </div>
+     
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Is the visit online?</label>
+        <p-radioButton
+          name="isOnline"
+          [value]="true"
+          formControlName="isOnline"
+          label="Yes"
+        ></p-radioButton>
+        <p-radioButton
+          name="isOnline"
+          [value]="false"
+          formControlName="isOnline"
+          label="No"
+          [style]="{'margin-left':'1rem'}"
+        ></p-radioButton>
+      </div>
+
+    <div *ngIf="familyVisitForm.get('isOnline')?.value" class="form-field">
+      <label for="zoomLink">Zoom Link</label>
+      <input
+        id="zoomLink"
+        pInputText
+        formControlName="zoomLink"
+        placeholder="Enter Zoom link"
+      />
+    </div>
+    </div>
+    <div class="form-row">
+     
+      <div class="form-field">
+        <label for="patient">Select Patient</label>
+        <p-dropdown
+          [options]="patients"
+          optionLabel="firstName"
+          formControlName="patient"
+          placeholder="Select a patient"
+        ></p-dropdown>
+      </div>
+      <div class="form-field">
+        <label for="visitDetails">Visit Details</label>
+        <textarea
+          id="visitDetails"
+          pInputTextarea
+          formControlName="visitDetails"
+          rows="4"
+          placeholder="Provide details about the visit"
+          required
+        ></textarea>
+      </div>
+    </div>
+
+  
+
+    <div class="form-actions">
+      <button
+        pButton
+        type="submit"
+        label="{{ isEditMode ? 'Update Visit' : 'Schedule Visit' }}"
+        icon="pi pi-calendar-plus"
+        class="p-button-success"
+        [disabled]="familyVisitForm.invalid"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

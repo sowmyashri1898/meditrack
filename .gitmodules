@@ -1,0 +1,3 @@
+[submodule "patient-care"]
+	path = patient-care
+	url = http://192.168.10.120/Sowmyashri/care-hub.git

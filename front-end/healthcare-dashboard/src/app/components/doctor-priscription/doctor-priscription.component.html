@@ -1,0 +1,108 @@
+<div class="appointments-section">
+  <h3>Prescription</h3>
+  <p-table [value]="completedAppointments" [responsive]="true" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Appointment Date</th>
+        <th>Patient</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appointment>
+      <tr>
+        <td>{{ appointment.appointmentDate | date }}</td>
+        <td>{{ appointment.patientName }}</td>
+        <td>{{ appointment.reason }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>
+          <button pButton icon="pi pi-pencil" label="Add Prescription" (click)="openPrescriptionDialog(appointment)" class="p-button-text"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog header="Add Prescription" [(visible)]="displayPrescriptionDialog" [modal]="true" [responsive]="true" [style]="{width: '60vw'}">
+  <form [formGroup]="prescriptionForm">
+
+    <div class="patient-banner">
+      <h4>{{ selectedAppointment?.patientName }}</h4>
+      <div class="details">
+        <div class="left-column">
+          <p>Gender: {{ selectedAppointment?.patient.gender }}</p>
+          <p>Appointment Date: {{ selectedAppointment?.appointmentDate | date }}</p>
+        </div>
+        <div class="right-column">
+          <p>Phone: {{ selectedAppointment?.patient.contactNumber }}</p>
+          <p>Email: {{ selectedAppointment?.patient.email }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="medication-section">
+      <div class="form-group">
+        <label for="medication">Medication</label>
+        <p-dropdown [options]="medications" formControlName="medication" placeholder="Select Medication" optionLabel="name" filter="true" filterBy="name"></p-dropdown>
+      </div>
+
+      <div class="form-group">
+        <label for="dosage">Dosage</label>
+        <p-dropdown [options]="dosages" formControlName="dosage" placeholder="Select Dosage" optionLabel="dosage" filter="true" filterBy="dosage"></p-dropdown>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" formControlName="quantity" placeholder="Enter Quantity" class="quantity-input">
+      </div>
+      
+
+      <button pButton icon="pi pi-plus" label="Add Medication" (click)="addMedication()" class="p-button-success"></button>
+    </div>
+
+    <table class="medication-table">
+      <thead>
+        <tr>
+          <th>Medication</th>
+          <th>Dosage</th>
+          <th colspan="2">Morning</th>
+          <th colspan="2">Afternoon</th>
+          <th colspan="2">Night</th>
+          <th>Note/Comments</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Before Food</th>
+          <th>After Food</th>
+          <th>Before Food</th>
+          <th>After Food</th>
+          <th>Before Food</th>
+          <th>After Food</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody formArrayName="medications">
+        <tr *ngFor="let medControl of addedMedications.controls; let i = index" [formGroupName]="i">
+          <td>{{ medControl.get('medicationName')?.value }}</td>
+          <td>{{ medControl.get('dosageName')?.value }}</td>
+            
+          <td><input type="checkbox" formControlName="morningBeforeFood"></td>
+          <td><input type="checkbox" formControlName="morningAfterFood"></td>
+          <td><input type="checkbox" formControlName="afternoonBeforeFood"></td>
+          <td><input type="checkbox" formControlName="afternoonAfterFood"></td>
+          <td><input type="checkbox" formControlName="nightBeforeFood"></td>
+          <td><input type="checkbox" formControlName="nightAfterFood"></td>
+          <td><input formControlName="note" placeholder="Comments"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p-footer>
+      <button pButton label="Save Prescription" type="submit" icon="pi pi-save" class="p-button-success" (click)="addPrescription()"></button>
+      <button pButton label="Close" icon="pi pi-times" (click)="displayPrescriptionDialog = false" class="p-button-secondary"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>

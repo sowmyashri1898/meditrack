@@ -1,0 +1,118 @@
+/* General styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 60%;
+  box-sizing: border-box;
+}
+
+/* Container for the entire profile and edit forms */
+.profile-container, .edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+.profile-card, .edit-profile-card {
+  width: 100%;
+  max-width: 600px;
+  min-height: 60vh;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+.profile-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-avatar {
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+/* Responsive form fields */
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* Buttons styling */
+mat-card-actions button {
+  margin-right: 10px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+/* Scrollable content */
+mat-card-content {
+  max-height: 60vh;
+  
+  overflow-y: auto;
+  padding-right: 10px; /* Adds a bit of space to avoid content touching the edge */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-card, .edit-profile-card {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card, .edit-profile-card {
+    max-width: 100%;
+  }
+  .profile-picture {
+    width: auto; /* Maintain aspect ratio */
+    height: 100%; /* Responsive sizing */
+    max-width: 100px; /* Limit the maximum width */
+    max-height: 100px; /* Limit the maximum height */
+    border-radius: 50%; /* Optional: makes the image round */
+  }
+}
+
+.edit-profile-card {
+  position: relative;
+}
+
+.edit-profile-container mat-form-field {
+  margin-bottom: 15px;
+}
+
+/* For better button accessibility on mobile */
+button[mat-raised-button] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Smooth scroll for overflow content */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

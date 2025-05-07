@@ -1,0 +1,192 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <h3>View Lab Results</h3>
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <button
+      pButton
+      icon="pi pi-plus"
+      label="Book test at home"
+      (click)="onBook()"
+      class="p-button-info"
+    ></button>
+
+    <button
+      pButton
+      label="Filter Results"
+      icon="pi pi-filter"
+      (click)="showFilterDialog()"
+      style="margin-left: 1rem"
+    ></button>
+  </div>
+</p-toolbar>
+
+<p-table
+  [value]="labResults"
+  [paginator]="true"
+  [rows]="10"
+  [responsive]="true"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Test Name</th>
+      <th>Test Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-result>
+    <tr>
+      <td>{{ result.testName }}</td>
+      <td>{{ result.testDate | date : "shortDate" }}</td>
+      <td>{{ result.status }}</td>
+      <td>
+        <button
+          pButton
+          label="View Details"
+          icon="pi pi-search"
+          (click)="viewTestDetails(result)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="Lab Test Details"
+  [(visible)]="displayTestDialog"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width: '50vw' }"
+>
+  <div *ngIf="selectedTest">
+    <h4>
+      {{ selectedTest.testName }} ({{
+        selectedTest.testDate | date : "shortDate"
+      }})
+    </h4>
+    <p><strong>Status:</strong> {{ selectedTest.status }}</p>
+    <p><strong>Findings:</strong></p>
+    <p>{{ selectedTest.findings }}</p>
+    <p *ngIf="selectedTest.notes"><strong>Notes:</strong></p>
+    <p *ngIf="selectedTest.notes">{{ selectedTest.notes }}</p>
+    <p-footer style="display: flex; justify-content: end">
+      <button
+        pButton
+        label="Download"
+        icon="pi pi-download"
+        (click)="downloadResult()"
+      ></button>
+      <button
+        pButton
+        label="Close"
+        icon="pi pi-times"
+        (click)="closeTestDialog()"
+        style="margin-left: 2rem"
+      ></button>
+    </p-footer>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Filter Lab Results"
+  [(visible)]="displayFilterDialog"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width: '30vw' }"
+>
+  <div class="field">
+    <label for="startDate">Start Date</label>
+    <p-calendar id="startDate" [(ngModel)]="filterStartDate"></p-calendar>
+  </div>
+  <div class="field">
+    <label for="endDate">End Date</label>
+    <p-calendar id="endDate" [(ngModel)]="filterEndDate"></p-calendar>
+  </div>
+  <p-footer style="display: flex; justify-content: end">
+    <button
+      pButton
+      label="Apply Filter"
+      icon="pi pi-check"
+      (click)="applyFilter()"
+    ></button>
+    <button
+      pButton
+      label="Clear Filter"
+      icon="pi pi-times"
+      (click)="clearFilter()"
+      style="margin-left: 1rem"
+    ></button>
+  </p-footer>
+</p-dialog>
+<p-dialog
+  header="Schedule A Test"
+  [(visible)]="displayScheduleDialog"
+  [modal]="true"
+  (onHide)="onHideAppointment()"
+  [responsive]="true"
+  [style]="{ width: '30vw' }"
+>
+  <form [formGroup]="scheduleForm">
+    <div
+      class="form-container"
+      style="display: flex; flex-direction: column; gap: 20px"
+    >
+      <!-- Appointment Date Selection -->
+      <div class="field" style="display: flex; flex-direction: column">
+        <label for="scheduleDate">Schedule Date</label>
+        <p-calendar
+          id="scheduleDate"
+          formControlName="date"
+          [showIcon]="true"
+          [minDate]="minDate"
+          *ngIf="displayScheduleDialog"
+          class="custom-calendar"
+        ></p-calendar>
+      </div>
+
+      <!-- Time Selection -->
+      <div class="field" style="display: flex; flex-direction: column">
+        <label for="scheduleTime">Schedule Time</label>
+        <input
+          id="scheduleTime"
+          formControlName="time"
+          type="time"
+          class="p-inputtext p-component"
+        />
+      </div>
+
+      <!-- Provider Selection -->
+      <div class="field" style="display: flex; flex-direction: column">
+        <label for="provider">Select Provider</label>
+        <p-dropdown
+          id="provider"
+          formControlName="provider"
+          [options]="providers"
+          optionLabel="name"
+          placeholder="Select a provider"
+        ></p-dropdown>
+      </div>
+
+      <!-- Submit Button -->
+      <p-footer style="display: flex; justify-content: end">
+        <button
+          pButton
+          label="Submit"
+          icon="pi pi-check"
+          (click)="submitSchedule()"
+          class="p-button-success"
+          [disabled]="scheduleForm.invalid"
+        ></button>
+        <button
+          pButton
+          label="Clear"
+          (click)="clear()"
+          class="p-button-warning"
+          style="margin-left: 1rem"
+        ></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>

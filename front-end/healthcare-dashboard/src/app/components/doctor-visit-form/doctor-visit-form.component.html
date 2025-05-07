@@ -1,0 +1,27 @@
+<div class="visit-form">
+    <h3>Add a New Visit</h3>
+    <form (ngSubmit)="addVisit()">
+      <div class="form-group">
+        <label for="patientName">Patient Name</label>
+        <input type="text" id="patientName" [(ngModel)]="newVisit.patientName" name="patientName" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="visitDate">Visit Date</label>
+        <input type="datetime-local" id="visitDate" [(ngModel)]="newVisit.visitDate" name="visitDate" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="purpose">Purpose</label>
+        <input type="text" id="purpose" [(ngModel)]="newVisit.purpose" name="purpose" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="status">Status</label>
+        <input type="text" id="status" [(ngModel)]="newVisit.status" name="status" required>
+      </div>
+  
+      <button type="submit" [disabled]="!newVisit.patientName || !newVisit.visitDate || !newVisit.purpose || !newVisit.status">Add Visit</button>
+    </form>
+  </div>
+  

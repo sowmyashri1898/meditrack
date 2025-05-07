@@ -1,0 +1,22 @@
+<p-dialog header="Video Call" [(visible)]="displayjoinDialog"
+  [modal]="true" [responsive]="true" [style]="{width: '50vw', height: '60vw'}"
+  [closable]="true" (onHide)="hideVideoDialog()">
+  
+  <div class="video-chat-container">
+    <div class="video-box" *ngFor="let participant of participants">
+      <video [srcObject]="participant.videoStream" autoplay></video>
+      <p>{{ participant.name }}</p>
+    </div>
+
+    <div class="local-video-box">
+      <video #localVideo autoplay muted></video>
+      <p>You</p>
+    </div>
+  </div>
+
+  <p-footer>
+    <button pButton icon="pi pi-microphone" label="Mute" (click)="toggleMute()" class="p-button-text"></button>
+    <button pButton icon="pi pi-video" label="Stop Video" (click)="toggleVideo()" class="p-button-text"></button>
+    <button pButton icon="pi pi-phone" label="Leave" (click)="leaveCall()" class="p-button-danger"></button>
+  </p-footer>
+</p-dialog>

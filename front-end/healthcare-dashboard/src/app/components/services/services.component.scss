@@ -1,0 +1,78 @@
+
+.services-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, #b89e9e 0%, #daa8b9 100%); /* Gradient background */
+    font-family: Arial, sans-serif;
+  }
+  
+  .services-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .services-header h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+  }
+  
+  .services-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  /* Flexible grid layout */
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .service-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .service-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .service-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .service-card p {
+    font-size: 1rem;
+    color: #777;
+    line-height: 1.5;
+  }
+  
+  .contact-callout {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  .contact-callout a {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-callout a:hover {
+    text-decoration: underline;
+  }
+  

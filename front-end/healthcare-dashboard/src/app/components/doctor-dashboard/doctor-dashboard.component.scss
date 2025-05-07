@@ -1,0 +1,23 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  mat-card {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+  
+    .main-content {
+      margin-top: 60px;
+    }
+  }
+  

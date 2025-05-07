@@ -1,0 +1,26 @@
+<section class="contact">
+    <div class="container">
+      <h2 class="text-center">Contact Us</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="p-fluid">
+          <div class="p-field">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" pInputText [(ngModel)]="contact.name" name="name" required />
+          </div>
+          <div class="p-field">
+            <label for="email">Email</label>
+            <input id="email" type="email" pInputText [(ngModel)]="contact.email" name="email" required />
+          </div>
+          <div class="p-field">
+            <label for="message">Message</label>
+            <textarea id="message" pInputTextarea [(ngModel)]="contact.message" name="message" rows="4" cols="30" required></textarea>
+          </div>
+          <div class="p-field">
+            <!-- PrimeNG Button -->
+            <p-button label="Send Message" icon="pi pi-paper-plane" type="submit" class="p-button-rounded p-button-info"></p-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  

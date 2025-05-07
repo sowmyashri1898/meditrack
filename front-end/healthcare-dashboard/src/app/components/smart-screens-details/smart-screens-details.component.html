@@ -1,0 +1,11 @@
+<app-old-age-header></app-old-age-header>
+
+<div class="row mb-3">
+    <label for="filter">Filter by Functionality:</label>
+    <select id="filter" [(ngModel)]="selectedFunctionality" (change)="applyFilter()" class="form-select">
+      <option value="">All</option>
+      <option *ngFor="let functionality of functionalities" [value]="functionality">{{ functionality }}</option>
+    </select>
+  </div>
+  <p *ngFor="let feature of filteredFeatures">{{ feature }}</p>
+  

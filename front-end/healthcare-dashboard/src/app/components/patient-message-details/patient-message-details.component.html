@@ -1,0 +1,9 @@
+<div *ngIf="message">
+    <h3>{{ message.subject }}</h3>
+    <p><strong>From:</strong> {{ message.sender.username }}</p>
+    <p><strong>To:</strong> {{ message.receiver.username }}</p>
+    <p>{{ message.body }}</p>
+  
+    <button (click)="markAsRead()" *ngIf="message.status === 'UNREAD'">Mark as Read</button>
+  </div>
+  

@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+    <h1>Schedule for the Day</h1>
+
+    <section class="schedule-section">
+  
+     
+  
+      <div class="section">
+        <h3>Entertainment</h3>
+        <div class="grid">
+          <div *ngFor="let item of entertainment" class="card">
+            <a [routerLink]="[item.route]">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <p>{{ item.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="section">
+        <h3>Generic</h3>
+        <div class="grid">
+          <div *ngFor="let item of generic" class="card">
+            <a [routerLink]="[item.route]">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <p>{{ item.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

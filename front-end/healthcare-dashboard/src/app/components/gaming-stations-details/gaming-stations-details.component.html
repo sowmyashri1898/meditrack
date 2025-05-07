@@ -1,0 +1,17 @@
+<app-old-age-header></app-old-age-header>
+<div class="container my-5">
+    <h2 class="text-center">Gaming Stations</h2>
+    <p class="text-center">Engage with interactive and fun gaming activities.</p>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <ul>
+          <li *ngFor="let game of games">{{ game }}</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <img src="assets/images/gaming-station.jpg" alt="Gaming Station" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+  

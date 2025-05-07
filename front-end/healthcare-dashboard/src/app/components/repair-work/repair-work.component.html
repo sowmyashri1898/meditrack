@@ -1,0 +1,18 @@
+<div class="repair-work-container">
+    <h2>Repair Work</h2>
+  
+    <div class="repair-list">
+      <mat-card *ngFor="let repair of repairs">
+        <mat-card-header>
+          <mat-card-title>{{ repair.name }}</mat-card-title>
+          <mat-card-subtitle>{{ repair.type }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Assigned to: {{ repair.assignedTo }}</p>
+          <p>Status: {{ repair.status }}</p>
+          <button mat-raised-button color="warn" (click)="trackRepair(repair)">Track Progress</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

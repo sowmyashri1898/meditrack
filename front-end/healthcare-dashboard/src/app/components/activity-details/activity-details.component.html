@@ -1,0 +1,76 @@
+<app-old-age-header></app-old-age-header>
+<div class="container my-5">
+    <h2 class="text-center">Activities for Old Age People</h2>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="categoryFilter">Select Category:</label>
+        <select
+          id="categoryFilter"
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+          class="form-select"
+        >
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="searchKeyword">Search:</label>
+        <input
+          type="text"
+          id="searchKeyword"
+          [(ngModel)]="searchKeyword"
+          (input)="applyFilters()"
+          class="form-control"
+          placeholder="Search activities..."
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="dateFilter">Filter by Date:</label>
+        <input
+          type="date"
+          id="dateFilter"
+          [(ngModel)]="selectedDate"
+          (change)="applyFilters()"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="sortBy">Sort By:</label>
+        <select
+          id="sortBy"
+          [(ngModel)]="sortBy"
+          (change)="applyFilters()"
+          class="form-select"
+        >
+          <option value="relevance">Relevance</option>
+          <option value="date">Date</option>
+          <option value="popularity">Popularity</option>
+        </select>
+      </div>
+    </div>
+  
+    <h1 style="color: brown;">Upcoming Events</h1>
+    <ul>
+      <li *ngFor="let activity of upcomingActivities">
+        <strong>{{ activity.name }}</strong> - {{ activity.description }}
+        ({{ activity.category }}, {{ activity.date }} at {{ activity.time }})
+        <a *ngIf="activity.joinLink" [href]="activity.joinLink" target="_blank" class="btn btn-primary mt-2">
+          Join Session
+        </a>
+      </li>
+    </ul>
+
+    <h1 style="color: brown;">Past Events</h1>
+    <ul>
+      <li *ngFor="let activity of pastActivities">
+        <strong>{{ activity.name }}</strong> - {{ activity.description }}
+        ({{ activity.category }}, {{ activity.date }} at {{ activity.time }})
+        <a *ngIf="activity.joinLink" [href]="activity.joinLink" target="_blank" class="btn btn-primary mt-2">
+          Join Session
+        </a>
+      </li>
+    </ul>
+</div>

@@ -1,0 +1,24 @@
+<div class="chat-container" *ngIf="chatVisible">
+    <h2>Chat with the Doctor's Assistant</h2>
+    
+    <div class="chat-box">
+    
+      <div class="message" *ngFor="let message of messages">
+        <p><strong>{{ message.sender }}:</strong> {{ message.text }}</p>
+      </div>
+      
+    </div>
+    
+    <div class="input-container">
+      <input [(ngModel)]="userMessage" placeholder="Describe your symptoms..." />
+      <button (click)="sendMessage()">Send</button>
+      <!-- <i class="fas fa-paper-plane" (click)="sendMessage()"></i> -->
+
+    </div>
+  </div>
+  
+  <!-- Chat Icon -->
+  <div class="chat-icon" (click)="toggleChat()">
+    <i class="fas fa-comment-alt"></i> 
+  </div>
+  

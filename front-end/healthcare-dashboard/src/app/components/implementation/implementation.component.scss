@@ -1,0 +1,86 @@
+
+section {
+    margin-bottom: 50px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* Timeline Styles */
+  .timeline {
+    margin-top: 30px;
+    .timeline-item {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  
+    .timeline-date {
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: #007bff;
+    }
+  
+    .timeline-content {
+      max-width: 500px;
+      padding-left: 20px;
+      h4 {
+        color: #333;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        color: #666;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  /* Card Styling */
+  .p-card {
+    margin-bottom: 20px;
+  }
+  
+  .p-card img {
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  
+  /* Footer Section Styles */
+  .footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    .p-button-info {
+      background-color: #17a2b8;
+      border: none;
+    }
+    button {
+      margin-top: 10px;
+    }
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+    .col-md-6 {
+      margin-bottom: 20px;
+    }
+    .row {
+      margin-bottom: 30px;
+    }
+  
+    .timeline-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

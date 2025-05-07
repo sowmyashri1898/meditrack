@@ -1,0 +1,11 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "database": {
+  },
+  "functions": {
+    "predeploy": [
+    ]
+  }
+}

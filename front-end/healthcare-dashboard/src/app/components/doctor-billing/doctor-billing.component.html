@@ -1,0 +1,34 @@
+<div class="billing-container">
+    <mat-card class="billing-card">
+      <mat-card-header>
+        <mat-card-title>Billing & Payments</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let bill of bills">
+            <mat-icon matListIcon>receipt</mat-icon>
+            <div matLine>Patient: {{ bill.patientName }}</div>
+            <div matLine>Amount: {{ bill.amount | currency }}</div>
+            <div matLine>Status: {{ bill.status }}</div>
+            <button mat-button (click)="onViewBill(bill)">View Details</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="bill-detail-container">
+    <mat-card class="bill-detail-card">
+      <mat-card-header>
+        <mat-card-title>Bill for {{ bill.patientName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Amount: {{ bill.amount | currency }}</p>
+        <p>Status: {{ bill.status }}</p>
+        <mat-divider></mat-divider>
+        <form (ngSubmit)="onPayBill()">
+          <button mat-raised-button color="primary" type="submit" [disabled]="bill.status === 'Paid'">Pay Bill</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+    

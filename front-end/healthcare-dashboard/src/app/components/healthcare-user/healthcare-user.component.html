@@ -1,0 +1,182 @@
+<!-- <p-card header="Healthcare Users" [style]="{'margin-top': '10px'}">
+    <div class="ui-helper-clearfix">
+      <p-button label="New Healthcare User" icon="pi pi-plus" (click)="showDialogToAdd()" styleClass="p-button-success"></p-button>
+    </div>
+  
+    <p-table [value]="healthcareUsers" [responsive]="true" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]" selectionMode="single" [(selection)]="selectedUser">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phoneNumber }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <p-button icon="pi pi-pencil" (click)="edit(user)" styleClass="p-button-warning p-mr-2"></p-button>
+            <p-button icon="pi pi-trash" (click)="delete(user)" styleClass="p-button-danger"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+  
+  <p-dialog [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{'width': '400px'}" [header]="'Healthcare User Details'">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" pInputText [(ngModel)]="selectedUser.firstName" />
+      </div>
+  
+      <div class="p-field">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" pInputText [(ngModel)]="selectedUser.lastName" />
+      </div>
+  
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" pInputText [(ngModel)]="selectedUser.email" />
+      </div>
+  
+      <div class="p-field">
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="text" pInputText [(ngModel)]="selectedUser.phoneNumber" />
+      </div>
+  
+      <div class="p-field">
+        <label for="role">Role</label>
+        <p-dropdown [options]="['doctor', 'admin']" [(ngModel)]="selectedUser.role" placeholder="Select a Role"></p-dropdown>
+      </div>
+  
+      <p-footer>
+        <p-button label="Save" icon="pi pi-check" (click)="save()" styleClass="p-button-success"></p-button>
+        <p-button label="Cancel" icon="pi pi-times" (click)="displayDialog = false"></p-button>
+      </p-footer>
+    </div>
+  </p-dialog>
+   -->
+   <p-card header="Healthcare User Form">
+    <form [formGroup]="healthcareUserForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid grid formgrid">
+        <!-- First Name -->
+        <div class="field col-12 md:col-6">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" pInputText formControlName="firstName" />
+          <div *ngIf="healthcareUserForm.get('firstName')?.invalid && healthcareUserForm.get('firstName')?.touched" class="error-message">
+            First Name is required.
+          </div>
+        </div>
+  
+        <!-- Last Name -->
+        <div class="field col-12 md:col-6">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" pInputText formControlName="lastName" />
+          <div *ngIf="healthcareUserForm.get('lastName')?.invalid && healthcareUserForm.get('lastName')?.touched" class="error-message">
+            Last Name is required.
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="field col-12 md:col-6">
+          <label for="email">Email</label>
+          <input id="email" type="email" pInputText formControlName="email" />
+          <div *ngIf="healthcareUserForm.get('email')?.invalid && healthcareUserForm.get('email')?.touched" class="error-message">
+            Please enter a valid email.
+          </div>
+        </div>
+  
+        <!-- Phone Number -->
+        <div class="field col-12 md:col-6">
+          <label for="phoneNumber">Phone Number</label>
+          <input id="phoneNumber" type="text" pInputText formControlName="phoneNumber" />
+          <div *ngIf="healthcareUserForm.get('phoneNumber')?.invalid && healthcareUserForm.get('phoneNumber')?.touched" class="error-message">
+            Phone Number is required.
+          </div>
+        </div>
+  
+        <!-- Address -->
+        <div class="field col-12">
+          <label for="address">Address</label>
+          <textarea id="address" pInputTextarea rows="3" formControlName="address"></textarea>
+          <div *ngIf="healthcareUserForm.get('address')?.invalid && healthcareUserForm.get('address')?.touched" class="error-message">
+            Address is required.
+          </div>
+        </div>
+  
+        <!-- Date of Birth -->
+        <div class="field col-12 md:col-6">
+          <label for="dob">Date of Birth</label>
+          <p-calendar id="dob" formControlName="dob" [showTime]="false"></p-calendar>
+          <div *ngIf="healthcareUserForm.get('dob')?.invalid && healthcareUserForm.get('dob')?.touched" class="error-message">
+            Date of Birth is required.
+          </div>
+        </div>
+  
+        <!-- Gender -->
+        <div class="field col-12 md:col-6">
+          <label for="gender">Gender</label>
+          <input id="gender" type="text" pInputText formControlName="gender" />
+          <div *ngIf="healthcareUserForm.get('gender')?.invalid && healthcareUserForm.get('gender')?.touched" class="error-message">
+            Gender is required.
+          </div>
+        </div>
+  
+        <!-- Profile Picture -->
+        <div class="field col-12 md:col-6">
+          <label for="profilePicture">Profile Picture</label>
+          <input id="profilePicture" type="file" pFileUpload formControlName="profilePicture" />
+        </div>
+  
+        <!-- Status -->
+        <div class="field col-12 md:col-6">
+          <label for="status">Status</label>
+          <p-dropdown [options]="userStatuses" formControlName="status" placeholder="Select Status"></p-dropdown>
+          <div *ngIf="healthcareUserForm.get('status')?.invalid && healthcareUserForm.get('status')?.touched" class="error-message">
+            Status is required.
+          </div>
+        </div>
+  
+        <!-- Role -->
+        <div class="field col-12 md:col-6">
+          <label for="role">Role</label>
+          <p-dropdown [options]="userRoles" formControlName="role" placeholder="Select Role"></p-dropdown>
+          <div *ngIf="healthcareUserForm.get('role')?.invalid && healthcareUserForm.get('role')?.touched" class="error-message">
+            Role is required.
+          </div>
+        </div>
+  
+        <!-- Created At -->
+        <div class="field col-12 md:col-6">
+          <label for="createdAt">Created At</label>
+          <p-calendar id="createdAt" formControlName="createdAt" [showTime]="false"></p-calendar>
+          <div *ngIf="healthcareUserForm.get('createdAt')?.invalid && healthcareUserForm.get('createdAt')?.touched" class="error-message">
+            Created At is required.
+          </div>
+        </div>
+  
+        <!-- Updated At -->
+        <div class="field col-12 md:col-6">
+          <label for="updatedAt">Updated At</label>
+          <p-calendar id="updatedAt" formControlName="updatedAt" [showTime]="false"></p-calendar>
+          <div *ngIf="healthcareUserForm.get('updatedAt')?.invalid && healthcareUserForm.get('updatedAt')?.touched" class="error-message">
+            Updated At is required.
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="field col-12">
+          <button pButton type="submit" label="Submit" [disabled]="healthcareUserForm.invalid"></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
+  

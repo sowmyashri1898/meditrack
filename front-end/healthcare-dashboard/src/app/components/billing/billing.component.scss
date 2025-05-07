@@ -1,0 +1,59 @@
+/* billing.component.css */
+.container {
+    padding: 20px;
+    background-color: #f4f7fa;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #2e3b4e;
+  }
+  
+  .bill-summary, .payment-history, .insurance-summary {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .status {
+    font-weight: bold;
+    color: #d9534f;
+  }
+  
+  .payment-history table {
+    width: 100%;
+  }
+  
+  .payment-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-form label {
+    margin-bottom: 5px;
+  }
+  
+  .payment-form input, .payment-form select {
+    margin-bottom: 15px;
+  }
+  
+  p-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  

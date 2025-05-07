@@ -1,0 +1,22 @@
+.medication-container {
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .medication-list {
+    margin-top: 20px;
+  }
+  
+  mat-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button {
+    margin-left: 20px;
+  }
+  

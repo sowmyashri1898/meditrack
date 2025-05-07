@@ -1,0 +1,19 @@
+<div class="doctor-visit-container">
+  <h2>Doctor Visits</h2>
+
+  <div *ngIf="upcomingAppointments && upcomingAppointments.length > 0">
+    <mat-card *ngFor="let appointment of upcomingAppointments">
+      <mat-card-header>
+        <mat-card-title>{{ appointment.doctorName }}</mat-card-title>
+        <mat-card-subtitle>{{ appointment.specialty || 'N/A' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Available for virtual consultation: {{ appointment.status }}</p>
+        <button mat-raised-button color="primary" (click)="bookAppointment()">Book Appointment</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <p *ngIf="upcomingAppointments?.length === 0">No upcoming appointments</p>
+</div>
+

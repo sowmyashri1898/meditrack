@@ -1,0 +1,268 @@
+
+<div class="button-container">
+  <button pButton type="button" label="Add Event" icon="pi pi-plus" (click)="openDialog()"></button>
+</div>
+
+<p-dialog 
+  [(visible)]="isDialogVisible" 
+  [modal]="true" 
+  [responsive]="true" 
+  [style]="{width: '50vw'}" 
+  (onHide)="closeDialog()">
+  
+  <ng-template pTemplate="header">
+    <div class="custom-dialog-header">
+      {{ selectedEventId ? 'Edit Event' : 'Add Event' }}
+    </div>
+  </ng-template>
+
+  <form [formGroup]="eventForm" (ngSubmit)="addOrUpdateEvent()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="eventName">Event Name</label>
+        <input
+          pInputText
+          id="eventName"
+          formControlName="eventName"
+          placeholder="e.g., Movie Night"
+        />
+      </div>
+
+      <div class="p-field">
+        <label for="description">Description</label>
+        <textarea
+          pInputTextarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="e.g., A movie screening in the main lounge."
+        ></textarea>
+      </div>
+
+      <div class="p-field">
+        <label for="tags">Tags</label>
+        <p-multiSelect
+          id="tags"
+          formControlName="tags"
+          [options]="tags"
+          placeholder="Select Tags"
+        ></p-multiSelect>
+      </div>
+
+      <div class="p-field">
+        <label for="startTime">Start Date & Time</label>
+        <p-calendar
+          id="startTime"
+          formControlName="startTime"
+          [showTime]="true"
+          appendTo="body"
+          hourFormat="12"
+        ></p-calendar>
+      </div>
+
+      <div class="p-field">
+        <label for="endTime">End Date & Time</label>
+        <p-calendar
+          id="endTime"
+          formControlName="endTime"
+          [showTime]="true"
+          appendTo="body"
+          hourFormat="12"
+        ></p-calendar>
+      </div>
+
+      <div class="p-field">
+        <label for="category">Category</label>
+        <p-dropdown
+          id="category"
+          formControlName="category"
+          [options]="categories"
+          placeholder="Select a Category"
+          appendTo="body"
+        ></p-dropdown>
+      </div>
+
+      <div class="p-field">
+        <label for="accessOptions">Access Options</label>
+        <p-dropdown
+          id="accessOptions"
+          formControlName="accessOptions"
+          [options]="accessOptions"
+          placeholder="Select Access Option"
+        ></p-dropdown>
+      </div>
+
+      <div class="p-field">
+        <label for="notificationPreferences">Notification Preferences</label>
+        <p-multiSelect
+          id="notificationPreferences"
+          formControlName="notificationPreferences"
+          [options]="notifications"
+          placeholder="Select Notifications"
+        ></p-multiSelect>
+      </div>
+
+      <div class="p-field">
+        <label for="participantLimit">Participant Limit</label>
+        <input
+          pInputText
+          id="participantLimit"
+          formControlName="participantLimit"
+          placeholder="e.g., 50"
+          type="number"
+        />
+      </div>
+
+      <div class="p-field-checkbox">
+        <p-checkbox
+          id="rsvpRequired"
+          formControlName="rsvpRequired"
+          binary="true"
+          label="RSVP Required"
+        ></p-checkbox>
+      </div>
+
+      <div class="p-field">
+        <label for="patientIds">Patients</label>
+        <p-multiSelect
+          id="patientIds"
+          formControlName="patientIds"
+          [options]="patientOptions" 
+          placeholder="Select Patients"
+        ></p-multiSelect>
+      </div>
+
+      <div class="p-field">
+        <label for="guardianIds">Guardians</label>
+        <p-multiSelect
+          id="guardianIds"
+          formControlName="guardianIds"
+          [options]="guardianOptions" 
+          placeholder="Select Guardians"
+        ></p-multiSelect>
+      </div>
+
+      <div class="button-group">
+        <button
+          pButton
+          type="submit"
+          label="Save Event"
+          icon="pi pi-check"
+          class="p-button-success"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-secondary"
+          (click)="closeDialog()"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+<!-- Search Fields -->
+<div class="p-grid">
+  <div class="p-col-auto">
+    <label for="searchEventName">Event Name</label>
+    <input
+      pInputText
+      id="searchEventName"
+      [(ngModel)]="searchParams.eventName"
+      placeholder="Search Event Name"
+    />
+  </div>
+
+  <div class="p-col-auto">
+    <label for="searchCategory">Category</label>
+    <p-dropdown
+      id="searchCategory"
+      [(ngModel)]="searchParams.category"
+      [options]="categories"
+      placeholder="Select Category"
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+
+  <div class="p-col-auto">
+    <label for="searchStartTime">Start Date</label>
+    <p-calendar
+      id="searchStartTime"
+      [(ngModel)]="searchParams.startTime"
+      [showTime]="true"
+      hourFormat="12"
+      placeholder="Search Start Time"
+    ></p-calendar>
+  </div>
+
+  <div class="p-col-auto">
+    <label for="searchEndTime">End Date</label>
+    <p-calendar
+      id="searchEndTime"
+      [(ngModel)]="searchParams.endTime"
+      [showTime]="true"
+      hourFormat="12"
+      placeholder="Search End Time"
+    ></p-calendar>
+  </div>
+
+  <div class="p-col-buttons" style="padding-top: 1.7rem;">
+    <button
+      pButton
+      label="Search"
+      icon="pi pi-search"
+      class="p-button-info"
+      (click)="filterEvents()"
+    ></button>
+    <button
+      pButton
+      label="Clear"
+      icon="pi pi-times"
+      class="p-button-warning"
+      (click)="clearFilters()"
+    ></button>
+  </div>
+</div>
+<!-- <h2>Entertinement Events</h2> -->
+
+<p-table [value]="events">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="background-color: black; color: white;">Event Name</th>
+      <th style="background-color: black; color: white;">Category</th>
+      <th style="background-color: black; color: white;">Start Date & Time</th>
+      <th style="background-color: black; color: white;">End Date & Time</th>
+      <th style="background-color: black; color: white;">Status</th>
+      <th style="background-color: black; color: white;">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-event>
+    <tr>
+      <td>{{ event.eventName }}</td>
+      <td>{{ event.category }}</td>
+      <td>{{ event.startTime | date: 'short' }}</td>
+      <td>{{ event.endTime | date: 'short' }}</td>
+      <td>{{ event.active ? 'Active' : 'Deleted' }}</td>
+      <td>
+        <button
+        pButton
+        icon="pi pi-pencil"
+        label="Edit"
+        (click)="openDialog(event.id)"
+        class="p-button-text"
+        [disabled]="!event.active"
+      ></button>
+      
+        <button
+          pButton
+          icon="pi pi-times"
+          label="Delete"
+          (click)="deleteEvent(event.id)"
+          class="p-button-danger"
+          [disabled]="!event.active"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,89 @@
+<header class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container" style="margin-left: 1rem;">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/logoresdient.png" alt="HealthCareX Logo" class="navbar-logo">
+      Intrust Global Resident Home
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+    
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/main-home">
+            <button class="btn btn-link">
+              <i class="fas fa-home"></i> Home
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/header/about-us">
+            <button class="btn btn-link">
+              <i class="fas fa-info-circle"></i> About Us
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/header/services">
+            <button class="btn btn-link">
+              <i class="fas fa-cogs"></i> Services
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/header/contact">
+            <button class="btn btn-link">
+              <i class="fas fa-phone"></i> 
+              Contact Us
+            </button>
+          </a>
+        </li>
+
+        <!-- Book Appointment Button -->
+        <!-- <li class="nav-item">
+          <p-button class="btn btn-outline-primary" (click)="onBookAppointment()">
+            <i class="fas fa-calendar-plus"></i> Book Appointment
+          </p-button>
+        </li> -->
+
+        <!-- Register/Login Button (Visible if not logged in) -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/header/login">
+            <button class="btn btn-link">
+              <i class="fas fa-user-plus"></i> Register/Login
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" (click)="logout()">
+            <button class="btn btn-link">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/header/profile">
+            <button class="btn btn-link">
+              <i class="fas fa-user"></i> Profile
+            </button>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/header/appointments">
+            <button class="btn btn-link">
+              <i class="fas fa-calendar-check"></i> Appointments
+            </button>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>
+<router-outlet></router-outlet>

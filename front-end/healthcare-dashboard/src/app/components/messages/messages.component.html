@@ -1,0 +1,59 @@
+<p-dialog header="Message Details" [(visible)]="displayMessageDialog" [style]="{width: '50vw'}">
+  <div *ngIf="selectedMessage">
+    <p><strong>Sender:</strong> {{ selectedMessage.sender }}</p>
+    <p><strong>Date:</strong> {{ selectedMessage.date | date }}</p>
+    <p><strong>Subject:</strong> {{ selectedMessage.subject }}</p>
+    <p><strong>Message:</strong> {{ selectedMessage.body }}</p>
+    <div *ngIf="selectedMessage.attachments?.length">
+      <p><strong>Attachments:</strong></p>
+      <ul>
+        <li *ngFor="let attachment of selectedMessage.attachments">
+          <a [href]="attachment.url" target="_blank">{{ attachment.name }}</a>
+        </li>
+      </ul>
+    </div>
+    <form [formGroup]="replyForm">
+      <textarea formControlName="replyMessage" placeholder="Type your reply here..." rows="5" style="width: 100%"></textarea>
+      <p-button label="Send Reply" (click)="sendReply()" icon="pi pi-send"></p-button>
+    </form>
+  </div>
+</p-dialog>
+
+
+<!-- Messages List -->
+<div class="messages-container">
+  <div class="header" [formGroup]="searchFilterForm" style="padding-top: 1rem;">
+    <!-- Search keyword input -->
+    <!-- <p-inputText formControlName="searchKeyword" placeholder="Search messages..."></p-inputText> -->
+    <!-- Dropdown filter -->
+    <p-dropdown [options]="filterOptions" formControlName="selectedFilter" placeholder="Filter by" optionLabel="label"></p-dropdown>
+  </div>
+
+  <p-table [value]="messages" [(selection)]="selectedMessages" [paginator]="true" [rows]="10" [globalFilterFields]="['subject', 'sender', 'body']">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Subject</th>
+        <th>Sender</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-message>
+      <tr>
+        <td>{{ message.subject }}</td>
+        <td>{{ message.sender }}</td>
+        <td>{{ message.date | date }}</td>
+        <td>
+            <div class="action-buttons">
+              <p-button icon="pi pi-search" (click)="viewMessageDetails(message)" label="View" class="p-button-sm"></p-button>
+              <p-button icon="pi pi-reply" (click)="replyToMessage(message)" label="Reply" class="p-button-sm"></p-button>
+              <p-button icon="pi pi-check" (click)="markAsRead(message)" label="Mark as Read" *ngIf="!message.isRead" class="p-button-sm"></p-button>
+              <p-button icon="pi pi-times" (click)="markAsUnread(message)" label="Mark as Unread" *ngIf="message.isRead" class="p-button-sm p-button-danger"></p-button>
+            </div>
+          </td>
+          
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

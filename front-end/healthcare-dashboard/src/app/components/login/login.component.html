@@ -1,0 +1,94 @@
+
+
+<div class="login-form-wrapper">
+  <div class="login-container">
+    <!-- <h2>Login to Your Account</h2> -->
+
+    <div class="role-selection" style="display: flex;">
+      <button 
+        pButton 
+        type="button" 
+        label="Login as Doctor" 
+        (click)="selectRole('doctor')" 
+        [ngClass]="{'selected-button': selectedRole === 'doctor', 'unselected-button': selectedRole !== 'doctor'}"
+        [disabled]="selectedRole === 'doctor'">
+      </button>
+      <button 
+        pButton 
+        type="button" 
+        label="Login as Resident" 
+        (click)="selectRole('patient')" 
+        [ngClass]="{'selected-button': selectedRole === 'patient', 'unselected-button': selectedRole !== 'patient'}"
+        [disabled]="selectedRole === 'patient'">
+      </button>
+      <button 
+        pButton 
+        type="button"
+        label="Login as Admin" 
+        (click)="selectRole('admin')" 
+        [ngClass]="{'selected-button': selectedRole === 'admin', 'unselected-button': selectedRole !== 'admin'}"
+        [disabled]="selectedRole === 'admin'">
+      </button>
+      <button 
+        pButton 
+        type="button" 
+        label="Login as Guardian"
+        (click)="selectRole('guardian')" 
+        [ngClass]="{'selected-button': selectedRole === 'guardian', 'unselected-button': selectedRole !== 'guardian'}"
+        [disabled]="selectedRole === 'guardian'">
+      </button>
+    </div>
+
+
+    <!-- Form starts here -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+      <!-- Email input -->
+      <div class="form-group" *ngIf="selectedRole">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" pInputText formControlName="email"
+          [ngClass]="{'error': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+          <small *ngIf="loginForm.get('email')?.hasError('required')">Email is required.</small>
+          <small *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address.</small>
+        </div>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" pInputText formControlName="password"
+          [ngClass]="{'error': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+          <small *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</small>
+          <small *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters long.</small>
+        </div>
+      </div>
+
+      <input type="hidden" formControlName="role" [value]="selectedRole" />
+
+
+      <!-- Submit Button -->
+      <button pButton type="submit" label="Login" [disabled]="loginForm.invalid"></button>
+    </form>
+
+    <!-- Social Login Buttons -->
+    <div class="social-login-buttons">
+      <button class="google-login-btn">
+        <i class="fab fa-google"></i> Sign in with Google
+      </button>
+      <button class="apple-login-btn">
+        <i class="fab fa-apple"></i> Sign in with Apple
+      </button>
+    </div>
+
+    <!-- Sign Up Link -->
+    <p class="signup-link">
+      Don't have an account? 
+      <a routerLink="/header/signup">Sign up here</a>
+    </p>
+  </div>
+</div>
+
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>
+<router-outlet></router-outlet>

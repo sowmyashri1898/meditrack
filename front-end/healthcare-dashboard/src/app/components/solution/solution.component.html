@@ -1,0 +1,98 @@
+<app-old-age-header></app-old-age-header>
+<section class="bg-primary text-white py-5 text-center">
+  <h1 class="display-4">Our Solutions for Enhancing Senior Lives</h1>
+  <p class="lead">Innovative technology to improve well-being, engagement, and health for our residents.</p>
+</section>
+
+<div style="display: flex;justify-content: end;margin-right: 4rem;">
+  <button pButton type="button" label="Activities" class="p-button-primary" routerLink="/activity-details"></button>
+
+</div>
+<section class="container my-5" id="virtual-reality">
+  <h2 class="text-center">Virtual Reality Experience</h2>
+  <p class="text-center">Explore immersive Virtual Reality experiences that help engage and enrich the lives of seniors.</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>Virtual Reality offers a new level of immersion for seniors. It allows them to experience adventures, travel to new places, and participate in stimulating activities from the comfort of their homes. These experiences are designed to help with cognitive function and emotional well-being.</p>
+      <button pButton type="button" label="Learn More" class="p-button-primary" routerLink="/virtual-reality-details"></button>
+    </div>
+    <div class="col-md-6">
+      <!-- <p-carousel [value]="vrImages" [numVisible]="1" [numScroll]="1"> -->
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item" alt="Virtual Reality Experience" class="w-100">
+        </ng-template>
+      <!-- </p-carousel> -->
+    </div>
+  </div>
+</section>
+
+<section class="container my-5" id="smart-screens">
+  <h2 class="text-center">Interactive Smart Screens</h2>
+  <p class="text-center">Smart screens enable residents to engage in activities, video calls, and more, with an easy-to-use interface designed for seniors.</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>Interactive smart screens provide a powerful tool for engagement, entertainment, and connectivity. Seniors can interact with family, engage in games, or access various content like health information, virtual social events, and more.</p>
+      <button pButton type="button" label="Explore Features" class="p-button-primary" routerLink="/smart-screens-details"></button>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/images/smart-screens.jpeg" alt="Smart Screen Interface" class="w-100">
+    </div>
+  </div>
+</section>
+
+<section class="container my-5" id="fitness">
+  <h2 class="text-center">Fitness and Wellness Programs</h2>
+  <p class="text-center">Promoting physical health through interactive fitness programs designed for seniors.</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>Our fitness programs offer interactive sessions that help seniors stay active, improve mobility, and boost overall health. These activities are designed to be easy to follow and tailored to individual needs, encouraging regular exercise in a fun and engaging way.</p>
+      <button pButton type="button" label="Join a Program" class="p-button-primary" routerLink="/fitness-program-details"></button>
+    </div>
+    <div class="col-md-6">
+      <!-- <p-carousel [value]="fitnessTestimonials" [numVisible]="1" [numScroll]="1"> -->
+        <ng-template pTemplate="item" let-testimonial>
+          <div class="testimonial">
+            <p class="lead">"{{ testimonial.text }}"</p>
+            <p>- {{ testimonial.author }}</p>
+          </div>
+        </ng-template>
+      <!-- </p-carousel> -->
+    </div>
+  </div>
+</section>
+
+<section class="container my-5" id="gaming-stations">
+  <h2 class="text-center">Gaming Stations</h2>
+  <p class="text-center">Engage residents with interactive gaming stations designed for senior citizens.</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p-card header="Gaming Stations Overview">
+        <img src="assets/images/gaming.jpeg" alt="Gaming Station" class="img-fluid" />
+        <p-footer>
+          <button pButton type="button" label="Learn More" class="p-button-primary" routerLink="/gaming-stations-details"></button>
+        </p-footer>
+      </p-card>
+    </div>
+    <div class="col-md-6">
+      <p-card header="Benefits of Gaming">
+        <ul>
+          <li>Improves hand-eye coordination.</li>
+          <li>Provides entertainment and social interaction.</li>
+          <li>Enhances cognitive function and memory.</li>
+        </ul>
+      </p-card>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-3">
+  <p>&copy; 2024 Enhancing Resident Experiences. All rights reserved.</p>
+  <div>
+    <button pButton type="button" label="Contact Us" class="p-button-info" routerLink="/contact"></button>
+    <button pButton type="button" label="Privacy Policy" class="p-button-secondary" routerLink="/privacy-policy"></button>
+  </div>
+</footer>

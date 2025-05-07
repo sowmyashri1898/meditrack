@@ -1,0 +1,5 @@
+<p-sidebar [(visible)]="visible" position="left" [style]="{'width': '250px'}">
+  <p-menu [model]="items"></p-menu>
+</p-sidebar>
+
+<button pButton label="Menu" icon="pi pi-bars menu-icon" (click)="toggleSidebar()"></button>

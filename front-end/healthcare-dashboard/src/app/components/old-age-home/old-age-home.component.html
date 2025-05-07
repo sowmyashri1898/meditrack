@@ -1,0 +1,123 @@
+<!-- Hero Section -->
+<app-old-age-header></app-old-age-header>
+<section class="bg-primary text-white py-5 text-center" style="margin-top: 0.3rem;">
+  <h1 class="display-4">Enhancing Resident Experiences with Technology</h1>
+  <p class="lead">Using Virtual Reality, Smart Screens, Fitness, and Gaming to improve the lives of seniors.</p>
+  <button pButton type="button" label="Explore Solutions" class="p-button-warning" routerLink="/solution"></button>
+</section>
+
+<!-- Solutions Overview -->
+<section class="container my-5">
+  <h2 class="text-center">Our Services</h2>
+  <div class="row">
+    <div *ngFor="let solution of solutions" class="col-md-6 col-lg-3" (click)="showRelatedApp(solution)">
+      <p-card [header]="solution.title">
+        <img [src]="solution.imageUrl" alt="{{ solution.title }}" class="card-img-top" />
+        <div class="card-body">
+          <p>{{ solution.description }}</p>
+        </div>
+        <!-- <p-footer>
+          <p>{{ solution.description }}</p>
+        </p-footer> -->
+      </p-card>
+    </div>
+  </div>
+</section>
+
+<!-- Related Apps Section -->
+<section *ngIf="selectedSolution" class="container my-5">
+  <h3 class="text-center">Related Apps for {{ selectedSolution.title }}</h3>
+  <div class="row">
+    <div *ngFor="let app of relatedApps[selectedSolution.title]" class="col-md-6 col-lg-3">
+      <p-card [header]="app.title" (click)="navigateToApp(app.appLink)">
+        <img [src]="app.imageUrl" class="card-img-top" alt="{{ app.title }}" />
+        <div class="card-body">
+          <p>{{ app.description }}</p>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</section>
+
+<!-- Display the related app for the selected solution -->
+<div *ngIf="selectedSolution">
+  <div *ngIf="selectedSolution.title === 'Virtual Reality'">
+    <h3>{{ selectedSolution.title }}</h3>
+    <p>{{ selectedSolution.description }}</p>
+    <!-- <ngx-youtube-player [videoId]="selectedSolution.videoId"></ngx-youtube-player> -->
+  </div>
+  
+  <div *ngIf="selectedSolution.title === 'Smart Screens'">
+    <h3>{{ selectedSolution.title }}</h3>
+    <p>{{ selectedSolution.description }}</p>
+    <!-- <iframe [src]="selectedSolution.appLink" width="800" height="450"></iframe> -->
+  </div>
+  
+  <div *ngIf="selectedSolution.title === 'Fitness'">
+    <h3>{{ selectedSolution.title }}</h3>
+    <p>{{ selectedSolution.description }}</p>
+    <p>Engage in fitness programs through this platform:</p>
+    <!-- <ul>
+      <li *ngFor="let exercise of fitnessData.results">
+        {{ exercise.name }} - {{ exercise.category }}
+      </li>
+    </ul> -->
+    <!-- <button pButton type="button" label="Start Fitness Program" class="p-button-success" routerLink="/fitness-program"></button> -->
+  </div>
+  
+  <div *ngIf="selectedSolution.title === 'Gaming Stations'">
+    <h3>{{ selectedSolution.title }}</h3>
+    <p>{{ selectedSolution.description }}</p>
+    <p>Here are some games you can enjoy:</p>
+    <!-- <ul>
+      <li *ngFor="let game of gameData.results">
+        <strong>{{ game.name }}</strong> - Rating: {{ game.rating }} / 5
+        <a [href]="game.background_image" target="_blank">View Image</a>
+      </li>
+    </ul>
+    <button pButton type="button" label="Play Game" class="p-button-info" routerLink="/game"></button> -->
+  </div>
+</div>
+
+<!-- Success Metrics Section -->
+<section class="container my-5">
+  <h2 class="text-center">Impact and Success</h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <p-card header="Residents Engaged">
+        <p class="text-center">
+          <i class="pi pi-users" style="font-size: 3em;"></i>
+        </p>
+        <p-footer>
+          <p>{{ successMetrics.residentsEngaged }}</p>
+        </p-footer>
+      </p-card>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <p-card header="Physical Health Improvement">
+        <p class="text-center">
+          <i class="pi pi-heart" style="font-size: 3em;"></i>
+        </p>
+        <p-footer>
+          <p>{{ successMetrics.physicalHealthImprovement }}</p>
+        </p-footer>
+      </p-card>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <p-card header="Cognitive Health Improvement">
+        <p class="text-center">
+          <span class="material-icons" style="font-size: 3em;">psychology</span>
+        </p>
+        <p-footer>
+          <p>{{ successMetrics.cognitiveHealthImprovement }}</p>
+        </p-footer>
+      </p-card>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center py-3">
+  <p>&copy; 2024 Enhancing Resident Experiences. All rights reserved.</p>
+  <button pButton type="button" label="Contact Us" class="p-button-info" routerLink="/contact"></button>
+</footer>

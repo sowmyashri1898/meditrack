@@ -1,0 +1,17 @@
+<div class="medication-container">
+    <h2>Medication Details</h2>
+    
+    <div class="medication-list">
+      <mat-list>
+        <mat-list-item *ngFor="let medication of medications">
+          <div class="medication-info">
+            <h3>{{ medication.name }}</h3>
+            <p>Dosage: {{ medication.dosage }}</p>
+            <p>Time: {{ medication.time }}</p>
+          </div>
+          <button mat-raised-button color="primary">Take Medication</button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  

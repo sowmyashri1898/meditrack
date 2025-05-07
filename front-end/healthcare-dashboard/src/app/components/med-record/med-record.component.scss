@@ -1,0 +1,25 @@
+.container {
+    padding: 2rem;
+    .search-bar {
+      margin-bottom: 1rem;
+      input {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+    p-table {
+      margin-top: 1rem;
+    }
+  }
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem; 
+    justify-content: space-around; 
+    align-items: center;
+  }
+  
+  .p-button-sm {
+    padding: 0.25rem 0.5rem; 
+    font-size: 0.85rem;
+  }
+  

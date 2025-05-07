@@ -1,0 +1,59 @@
+<body>
+<app-header></app-header>
+<app-chat></app-chat>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container text-center">
+    <h1>Your Health, Our Priority</h1>
+    <p>Quality care with innovative solutions and compassionate support.</p>
+    <p-button class="btn btn-primary" (click)="navigateToAppointment()">Book an Appointment</p-button>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+  <div class="container">
+    <h2 class="text-center">Our Services</h2>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let service of services">
+        <div class="service-card">
+          <i class="pi pi-medical"></i>
+          <h3>{{service.name}}</h3>
+          <p>{{service.description}}</p>
+          <!-- <a class="btn btn-outline-primary" [routerLink]="['/services', service.id]">Learn More</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="text-center">What Our Patients Say</h2>
+    <!-- <ngx-owl-carousel-o [options]="owlOptions"> -->
+      <ng-template carouselSlide *ngFor="let testimonial of testimonials">
+        <blockquote>
+          "{{testimonial.feedback}}"
+        </blockquote>
+        <p>- {{testimonial.patient_name}}</p>
+      </ng-template>
+    <!-- </ngx-owl-carousel-o> -->
+  </div>
+</section>
+
+<!-- Book an Appointment Section -->
+<section class="appointment">
+  <div class="container text-center">
+    <h2>Book an Appointment</h2>
+    <p>Choose from a wide range of services and book your appointment today!</p>
+    <p-button class="btn btn-success" (click)="navigateToAppointment()">Book Now</p-button>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<app-contact></app-contact>
+
+<app-footer></app-footer>
+</body>
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>

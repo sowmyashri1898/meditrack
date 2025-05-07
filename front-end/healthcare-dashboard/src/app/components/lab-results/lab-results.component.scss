@@ -1,0 +1,43 @@
+.p-toolbar {
+    margin-bottom: 20px;
+  }
+  
+  .p-table th {
+    text-align: left;
+  }
+  
+  .p-table td {
+    padding: 8px;
+  }
+  
+  .p-dialog header {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .p-dialog .p-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .p-dialog .p-footer button {
+    width: 100px;
+  }
+  
+  .p-calendar {
+    width: 100%;
+  }
+  
+  button {
+    width: 120px;
+  }
+  :host ::ng-deep .p-dialog .p-dialog-header {
+    background-color: aquamarine;
+    padding: 0.3rem !important;
+    color: rgb(20, 18, 18);
+
+}
+:host ::ng-deep .p-dialog-content {
+    padding: 0.9rem;
+}

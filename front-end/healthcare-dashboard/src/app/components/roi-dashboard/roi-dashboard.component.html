@@ -1,0 +1,24 @@
+<div class="app-container">
+    <app-sidebar></app-sidebar>
+    
+    <div class="main-content">
+      <app-navbar></app-navbar>
+      
+      <div class="dashboard-overview">
+        <div class="metrics-card">
+          <h3>Total Cost Savings</h3>
+          <!-- <p>{{ costSavings | currency }}</p> -->
+        </div>
+        <div class="metrics-card">
+          <h3>Diagnostic Accuracy</h3>
+          <p>{{ diagnosticAccuracy }}%</p>
+        </div>
+      </div>
+  
+      <!-- ROI Analytics Chart -->
+      <div class="chart-container">
+        <canvas id="roiChart"></canvas>
+      </div>
+    </div>
+  </div>
+  

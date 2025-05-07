@@ -1,0 +1,20 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+      <button type="button" pButton icon="pi pi-bars" (click)="toggleSidebar()" class="sidebar-toggle-btn"></button>
+      <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+
+      <span class="p-toolbar-title">GuardianDashboard</span>
+    </div>
+  
+    <div class="p-toolbar-group-right">
+      <button type="button" pButton icon="pi pi-bell" label="Notifications" class="notification-btn" (click)="onNotification()">
+  
+      </button>
+      <button type="button" pButton icon="pi pi-user" label="Profile" class="profile-btn"(click)="onProfile()">
+  
+      </button>
+      
+      <button type="button" pButton icon="pi pi-sign-out" label="Logout" (click)="logout()" class="logout-btn"></button>
+    </div>
+  </p-toolbar>
+  

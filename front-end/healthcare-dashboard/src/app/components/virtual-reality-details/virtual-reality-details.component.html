@@ -1,0 +1,24 @@
+<div class="games-container">
+  <h2>Virtual Reality</h2>
+
+  <div class="games-list">
+    <mat-card *ngFor="let game of events">
+      <mat-card-header>
+        <mat-card-title>{{ game.eventName }}</mat-card-title>
+        <span style="justify-content: flex-end; margin-bottom: 0.7rem;"
+        [ngClass]="{
+          'status-active': game.active,
+          'status-deleted': !game.active
+        }"
+        class="status-badge"
+      >
+        {{ game.active ? "Active" : "Deleted" }}
+      </span>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ game.description }}</p>
+        <button mat-raised-button color="primary" (click)="attendSession(game)">Start </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

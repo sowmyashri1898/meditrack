@@ -1,0 +1,72 @@
+<!-- billing.component.html -->
+<div class="container">
+    <h2>Billing & Payments</h2>
+  
+    <!-- Current Bill -->
+    <section class="current-bill">
+      <h3>Current Bill</h3>
+      <div class="bill-summary">
+        <p><strong>Total Outstanding:</strong> ${{ currentBill.totalOutstanding | number:'1.2-2' }}</p>
+        <p><strong>Due Date:</strong> {{ currentBill.dueDate | date:'shortDate' }}</p>
+        <p><strong>Insurance Coverage:</strong> ${{ currentBill.insuranceCoverage | number:'1.2-2' }}</p>
+        <p><strong>Patient Responsibility:</strong> ${{ currentBill.patientResponsibility | number:'1.2-2' }}</p>
+        <p><strong>Payment Status:</strong> <span class="status">{{ currentBill.status }}</span></p>
+  
+        <!-- Make Payment -->
+        <p-button label="Make Payment" icon="pi pi-credit-card" (click)="openPaymentModal()"></p-button>
+      </div>
+    </section>
+  
+    <!-- Payment History -->
+    <section class="payment-history">
+      <h3>Payment History</h3>
+      <p-table [value]="paymentHistory" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Payment Date</th>
+            <th>Amount Paid</th>
+            <th>Payment Method</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-payment>
+          <tr>
+            <td>{{ payment.paymentDate | date:'shortDate' }}</td>
+            <td>${{ payment.amount | number:'1.2-2' }}</td>
+            <td>{{ payment.method }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </section>
+  
+    <!-- Insurance Details -->
+    <section class="insurance-details">
+      <h3>Insurance Details</h3>
+      <div class="insurance-summary">
+        <p><strong>Insurance Provider:</strong> {{ insuranceDetails.provider }}</p>
+        <p><strong>Policy Number:</strong> {{ insuranceDetails.policyNumber }}</p>
+        <p><strong>Coverage Limit:</strong> ${{ insuranceDetails.coverageLimit | number:'1.2-2' }}</p>
+        <p><strong>Coverage Type:</strong> {{ insuranceDetails.coverageType }}</p>
+      </div>
+    </section>
+  
+    <!-- Payment Modal -->
+    <p-dialog header="Make a Payment" [(visible)]="paymentModalVisible" [modal]="true" [closable]="false" width="400px">
+      <div class="payment-form">
+        <label for="paymentAmount">Amount</label>
+        <input id="paymentAmount" type="number" pInputText [(ngModel)]="paymentAmount" />
+  
+        <label for="paymentMethod">Payment Method</label>
+        <select id="paymentMethod" pInputText [(ngModel)]="paymentMethod">
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+          <option value="PayPal">PayPal</option>
+        </select>
+  
+        <p-footer>
+          <button pButton label="Cancel" icon="pi pi-times" (click)="closePaymentModal()"></button>
+          <button pButton label="Submit Payment" icon="pi pi-check" (click)="submitPayment()"></button>
+        </p-footer>
+      </div>
+    </p-dialog>
+  </div>
+  
