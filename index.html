@@ -75,7 +75,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
     }
     textarea {
       flex-grow: 1;
@@ -93,6 +94,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 14px;
     }
     button:hover {
       background-color: #388e3c;
@@ -102,6 +104,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      justify-content: center;
     }
     .suggestion {
       background: #e0e0e0;
@@ -109,6 +112,13 @@
       border-radius: 5px;
       padding: 6px 10px;
       cursor: pointer;
+      font-size: 14px;
+    }
+    .input-container button {
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+      padding: 0;
     }
   </style>
 </head>
@@ -120,10 +130,10 @@
     <div class="message-box" id="messageBox"></div>
     <div class="input-container">
       <textarea id="userMessage" placeholder="Enter your symptoms or message"></textarea>
-      <button id="fileBtn">📎</button>
+      <button id="fileBtn" title="Attach file">📎</button>
       <input type="file" id="fileInput" accept="image/*" style="display:none;">
-      <button id="emojiBtn">😊</button>
-      <button id="micBtn">🎤</button>
+      <button id="emojiBtn" title="Add Emoji">😊</button>
+      <button id="micBtn" title="Voice Input">🎤</button>
       <button id="sendBtn">Send</button>
     </div>
     <div id="suggestions">
