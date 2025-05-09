@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .chat-container {
+      background: #ffffff;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h3 {
+      text-align: center;
+      color: #2e7d32;
+    }
+
+    .message-box {
+      flex-grow: 1;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #e1f5fe;
+      border-radius: 8px;
+      overflow-y: auto;
+      max-height: 300px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-message, .ai-message {
+      margin-bottom: 15px;
+      max-width: 80%;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background: #c8e6c9;
+      padding: 10px;
+      border-radius: 10px;
+      word-wrap: break-word;
+    }
+
+    .ai-message {
+      align-self: flex-start;
+      background: #bbdefb;
+      padding: 10px;
+      border-radius: 10px;
+      word-wrap: break-word;
+    }
+
+    .input-container {
+      display: flex;
+      align-items: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: none;
+      font-size: 14px;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <h3>Chat with Medical AI Assistant</h3>
+
+    <!-- Message History -->
+    <div class="message-box" id="messageBox">
+      <!-- User and AI messages will be dynamically inserted here -->
+    </div>
+
+    <!-- Input for user message -->
+    <div class="input-container">
+      <textarea id="userMessage" placeholder="Enter your symptoms or message"></textarea>
+      <button id="sendBtn">Send</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Handle button click to send message to the webhook
+    document.getElementById('sendBtn').addEventListener('click', function () {
+      // Get user input from the textarea
+      const message = document.getElementById('userMessage').value;
+  
+      // Check if the message is not empty
+      if (message.trim() === "") {
+        alert("Please enter a message.");
+        return;
+      }
+  
+      // Prepare the data to send in the POST request
+      const data = {
+        message: message
+      };
+  
+      // Add the user message to the chat history
+      const userMessageDiv = document.createElement("div");
+      userMessageDiv.classList.add("user-message");
+      userMessageDiv.textContent = message;
+      document.getElementById('messageBox').appendChild(userMessageDiv);
+  
+      // Send the POST request to the n8n webhook
+      fetch('https://sowmyashri.app.n8n.cloud/webhook/medicity-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data) // Send the dynamic user message in the request
+      })
+      .then(response => response.json()) // Convert response to JSON
+      .then(data => {
+        console.log("AI Response:", data);
+  
+        // Extract content from the response, check if it exists and display it
+        const aiResponseContent = data.content && data.content[0] && data.content[0].choices && data.content[0].choices[0].message && data.content[0].choices[0].message.content;
+        
+        if (aiResponseContent) {
+  const aiMessageDiv = document.createElement("div");
+  aiMessageDiv.classList.add("ai-message");
+  aiMessageDiv.textContent = aiResponseContent;
+  document.getElementById('messageBox').appendChild(aiMessageDiv);
+
+  // Scroll to bottom after appending
+  const messageBox = document.getElementById('messageBox');
+  messageBox.scrollTop = messageBox.scrollHeight;
+}
+ else {
+          alert("No response from AI.");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("Error occurred while fetching AI response.");
+      });
+
+      // Clear the input field after sending the message
+      document.getElementById('userMessage').value = "";
+
+      // Scroll to the bottom of the chat history
+      const messageBox = document.getElementById('messageBox');
+      messageBox.scrollTop = messageBox.scrollHeight;
+    });
+  </script>
+  
+</body>
+</html>
