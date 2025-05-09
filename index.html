@@ -10,21 +10,37 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f7f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       padding: 20px;
+      position: relative;
+    }
+    #openChatBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .chat-container {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 100%;
+      max-width: 400px;
       background: #ffffff;
       border-radius: 10px;
-      width: 100%;
-      max-width: 500px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
       padding: 20px;
+      z-index: 1000;
     }
     h3 { text-align: center; color: #2e7d32; }
     .message-box {
@@ -97,12 +113,14 @@
   </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h3>Chat with IGHS Medical AI Assistant</h3>
+  <button id="openChatBtn" title="Open Medical Assistant">💬</button>
+
+  <div class="chat-container" id="chatContainer">
+    <h3>IGHS Medical Assistant</h3>
     <div class="message-box" id="messageBox"></div>
     <div class="input-container">
       <textarea id="userMessage" placeholder="Enter your symptoms or message"></textarea>
-      <label for="fileInput" style="cursor:pointer;">📎</label>
+      <button id="fileBtn">📎</button>
       <input type="file" id="fileInput" accept="image/*" style="display:none;">
       <button id="emojiBtn">😊</button>
       <button id="micBtn">🎤</button>
@@ -119,6 +137,12 @@
     const messageBox = document.getElementById('messageBox');
     const textarea = document.getElementById('userMessage');
     const fileInput = document.getElementById('fileInput');
+    const chatContainer = document.getElementById('chatContainer');
+    const openChatBtn = document.getElementById('openChatBtn');
+
+    openChatBtn.addEventListener('click', () => {
+      chatContainer.style.display = chatContainer.style.display === 'flex' ? 'none' : 'flex';
+    });
 
     document.getElementById('sendBtn').addEventListener('click', function () {
       const message = textarea.value.trim();
@@ -163,33 +187,39 @@
       });
     });
 
-    const picker = new EmojiButton();
-    const trigger = document.getElementById('emojiBtn');
+    document.getElementById('fileBtn').addEventListener('click', () => {
+      fileInput.click();
+    });
 
+    const picker = new EmojiButton();
     picker.on('emoji', emoji => {
       textarea.value += emoji;
     });
-
-    trigger.addEventListener('click', () => {
-      picker.togglePicker(trigger);
+    document.getElementById('emojiBtn').addEventListener('click', () => {
+      picker.togglePicker(document.getElementById('emojiBtn'));
     });
 
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'en-US';
-    recognition.continuous = false;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
 
-    document.getElementById('micBtn').addEventListener('click', () => {
-      recognition.start();
-    });
+      document.getElementById('micBtn').addEventListener('click', () => {
+        recognition.start();
+      });
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      textarea.value = transcript;
-    };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        textarea.value += ' ' + transcript;
+      };
 
-    recognition.onerror = (event) => {
-      alert('Voice recognition error: ' + event.error);
-    };
+      recognition.onerror = (event) => {
+        alert('Voice recognition error: ' + event.error);
+      };
+    } else {
+      document.getElementById('micBtn').disabled = true;
+      document.getElementById('micBtn').title = "Speech Recognition not supported";
+    }
   </script>
 </body>
 </html>
