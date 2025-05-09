@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Chat</title>
+  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -99,15 +100,14 @@
   <div class="chat-container">
     <h3>Chat with Medical AI Assistant</h3>
     <div class="message-box" id="messageBox"></div>
-
     <div class="input-container">
       <textarea id="userMessage" placeholder="Enter your symptoms or message"></textarea>
-      <input type="file" id="fileInput" accept="image/*">
+      <label for="fileInput" style="cursor:pointer;">📎</label>
+      <input type="file" id="fileInput" accept="image/*" style="display:none;">
       <button id="emojiBtn">😊</button>
       <button id="micBtn">🎤</button>
       <button id="sendBtn">Send</button>
     </div>
-
     <div id="suggestions">
       <button class="suggestion">What is diabetes?</button>
       <button class="suggestion">COVID symptoms</button>
@@ -163,9 +163,15 @@
       });
     });
 
-    document.getElementById('emojiBtn').addEventListener('click', () => {
-      const emoji = prompt("Enter emoji 😊");
-      if (emoji) textarea.value += ' ' + emoji;
+    const picker = new EmojiButton();
+    const trigger = document.getElementById('emojiBtn');
+
+    picker.on('emoji', emoji => {
+      textarea.value += emoji;
+    });
+
+    trigger.addEventListener('click', () => {
+      picker.togglePicker(trigger);
     });
 
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
